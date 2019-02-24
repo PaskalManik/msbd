@@ -1,0 +1,84 @@
+/* General Styles */
+
+body {
+	background-color: #F7F7F7;
+	color: #6340A3;
+	/*font-family: 'Open Sans', sans-serif;*/
+	font-family: 'Roboto', sans-serif;
+}
+.logo span{
+	font-size: 1em !important;
+	font-family: 'Kaushan Script', cursive;
+}
+.custom-btn {
+	color: #fff !important;
+	background-image: linear-gradient(to right, #6441A5 , #2a0845);
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a{
+	color: #6340A3;
+}
+a:hover{
+	color: #6340A3;
+}
+
+input{
+	outline: #6340A3;
+}
+
+.hide{
+	display: none;
+}
+
+i{
+	color: #5B3997;
+}
+
+
+/*  Fade in Animation Keyframes*/
+
+#login,#signup {
+   
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+         -o-animation: fadein 1s; /* Opera < 12.1 */
+            animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/*  Fade in Animation Keyframes*/
+
+
