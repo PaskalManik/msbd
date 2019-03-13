@@ -1,10 +1,8 @@
-/* General Styles */
+/* ---- General Styles ----- */
 
 body {
 	background-color: #F7F7F7;
 	color: #5B332A;
-	/*font-family: 'Open Sans', sans-serif;*/
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Montserrat', sans-serif;
     font-size: .93em;
 }
@@ -14,7 +12,6 @@ body {
 
 .custom-btn {
 	color: #fff !important;
-    /* background-image: linear-gradient(to right, #6441A5 , #2a0845); */
     background-color: #F8694A;
     border-radius: 0;
 }
@@ -46,7 +43,7 @@ i{
     color: #30323A;
 }
 
-/*  Fade in Animation Keyframes*/
+/*  ----- Fade in Animation Keyframes  ----- */
 
 #login,#signup {
    
@@ -96,7 +93,7 @@ i{
     box-shadow: none;
 }
 
-/* Custom styles*/
+/* ------ Custom styles  -----  */
 
 .text-blue{
     color: #0053F9;
@@ -142,7 +139,10 @@ i{
     background: #fff;
     padding: 20px;
 }
-/* Overlay styles */
+
+
+/* ------ Overlay styles ------ */
+
 .dark-overlay{
     position: absolute;
     bottom: 0;
@@ -200,8 +200,16 @@ i{
 .rating i{
     color: #F8694A;
 }
+a, a img ,.product, div{outline : none !important;}
+.text-small{
+    font-size: .8em;
+}
 
-/*  text over carousel  */
+ul.social-links i{
+    font-size: 1.2em;
+}
+
+/* --- text over carousel ---- */
   .carousel-text{
     color: white;
     font-size: 20px;
@@ -239,7 +247,12 @@ i{
     font-size: .85em !important;
 }
 
-/*  Slick Slider */
+.product:hover{
+    transform: scale(1.02);
+}
+
+
+/*  -------  Slick Slider  Styles ------- */
 
 .slider {
     width: 100%;
@@ -256,9 +269,20 @@ i{
 
 .slick-prev:before,
 .slick-next:before {
-  color: black;
+  color: #30323A !important;
 }
 
+.slick-next:before { 
+    font-family:FontAwesome !important;
+    content: "\f054" !important;
+    font-size: 15px !important; 
+}
+
+.slick-prev:before { 
+    font-family:FontAwesome !important;
+    content: "\f053" !important;
+    font-size: 15px !important; 
+}
 
 .slick-slide {
   transition: all ease-in-out .3s;
@@ -271,4 +295,26 @@ i{
 
 .slick-current {
   opacity: 1;
+}
+
+
+
+/* ------------------ MEDIA QUERIES -----------------------------*/
+    /*
+
+    Note: Add All Media Queries under this section. It would be better to manage.
+
+    */
+@media(max-width: 768px){
+   
+    /*  text center on devices under 768px width */
+    footer{
+        text-align: center;
+    }
+
+    /* Hiding fa icon in footer links on devices under 768px width*/
+    footer ul>li i{
+        display: none;
+        opacity: 0;
+    }
 }
