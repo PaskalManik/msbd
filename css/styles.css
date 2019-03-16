@@ -2,7 +2,7 @@
 
 body {
 	background-color: #F7F7F7;
-	color: #5B332A;
+	color:#30323A;
     font-family: 'Montserrat', sans-serif;
     font-size: .93em;
 }
@@ -41,6 +41,14 @@ i{
 }
 .text-custom-1{
     color: #30323A;
+}
+
+.breadcrumb{
+    background-color: transparent;
+}
+.card-shadow{
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 /*  ----- Fade in Animation Keyframes  ----- */
@@ -202,13 +210,15 @@ i{
 }
 a, a img ,.product, div{outline : none !important;}
 .text-small{
-    font-size: .8em;
+    font-size: .8em !important;
 }
 
 ul.social-links i{
     font-size: 1.2em;
 }
-
+.rounded-badge{
+  border-radius: 50%;
+}
 /* --- text over carousel ---- */
   .carousel-text{
     color: white;
@@ -296,6 +306,218 @@ ul.social-links i{
 .slick-current {
   opacity: 1;
 }
+
+
+/* product details page*/
+
+#product-main-view .slick-arrow {
+  opacity: 0;
+}
+
+#product-main-view:hover .slick-arrow {
+  opacity: 1;
+}
+
+#product-main-view .product-view{
+  border: 2px solid #F5F5F6 !important;
+}
+
+#product-view {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+#product-view .product-view.slick-slide {
+  opacity: 0.2;
+}
+
+#product-view .product-view.slick-slide.slick-current {
+  opacity: 1;
+  -webkit-box-shadow: 0px 0px 0px 2px #F8694A inset;
+  box-shadow: 0px 0px 0px 2px #F8694A inset;
+}
+
+#product-view .product-view {
+  padding: 3px;
+}
+
+.product-view>img {
+  width: 100%;
+}
+
+.product-options .size-option {
+  margin-bottom: 15px;
+}
+
+.size-option>li {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  vertical-align: top;
+}
+
+.size-option>li:last-child {
+  margin-right: 0px;
+}
+
+.size-option>li>a {
+  display: block;
+  border: 1px solid #DADADA;
+  font-weight: 700;
+  padding: 2px 7px 0px 8px;
+}
+
+.size-option>li.active a {
+  color: #F8694A;
+  border-color: #F8694A;
+}
+
+.color-option>li {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  vertical-align: top;
+}
+
+.color-option>li:last-child {
+  margin-right: 0px;
+}
+
+.color-option>li>a {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.color-option>li.active a {
+  -webkit-box-shadow: 0px 0px 0px 2px #FFF, 0px 0px 0px 3px #F8694A;
+  box-shadow: 0px 0px 0px 2px #FFF, 0px 0px 0px 3px #F8694A;
+}
+
+.product-old-price{
+  font-size: .83em;
+  color: #F8694A;
+}
+
+#product-desc-list.list-group{
+  flex-direction: row;
+  border-bottom: 1px solid #DADADA;
+}
+#product-desc-list.list-group > a{
+  font-weight: bold !important;
+  margin: 6px;
+}
+
+#product-desc-list.list-group > a.active{
+ color: #F8694A;
+  text-decoration-line: underline;
+}
+
+/*----------------------------*\
+	Product tab
+\*----------------------------*/
+
+
+/*-- reviews --*/
+
+.single-review {
+  margin-bottom: 30px;
+}
+
+.single-review .review-heading>div {
+  display: inline-block;
+}
+
+.single-review .review-heading>div+div {
+  margin-left: 10px;
+}
+
+.single-review .review-rating {
+  display: inline-block;
+}
+
+.single-review .review-rating>i {
+  color: #FFB656;
+}
+
+.single-review .review-rating>i.empty {
+  color: #DADADA;
+}
+
+.single-review .review-body {
+  margin-top: 10px;
+}
+
+.reviews-pages li {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.reviews-pages li a {
+  display: block;
+  min-width: 10px;
+  text-align: center;
+}
+
+.reviews-pages li.active {
+  color: #F8694A;
+}
+
+/*-- review form --*/
+
+.review-form textarea.input {
+  height: 90px;
+}
+
+.review-form .input-rating .stars {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.review-form .input-rating .stars input[type="radio"] {
+  display: none;
+}
+
+.review-form .input-rating .stars>label {
+  float: right;
+  cursor: pointer;
+  padding: 0px 3px;
+  margin: 0px;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.review-form .input-rating .stars>label:hover, .review-form .input-rating .stars>label:hover~label {
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+.review-form .input-rating .stars>label:before {
+  content: "\f006";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  color: #DADADA;
+  font-size: 14px;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.review-form .input-rating .stars>label:hover:before, .review-form .input-rating .stars>label:hover~label:before {
+  content: "\f005";
+  color: #FFB656;
+}
+
+.review-form .input-rating .stars>input:checked label:before, .review-form .input-rating .stars>input:checked~label:before {
+  content: "\f005";
+  color: #FFB656;
+}
+
+
+
+/* product details page*/
+
 
 
 
