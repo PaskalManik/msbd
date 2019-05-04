@@ -3,8 +3,7 @@
 body {
 	background-color: #F7F7F7;
 	color:#30323A;
-    font-family: 'Montserrat', sans-serif;
-    font-size: .93em;
+    font-family: 'Titillium Web', sans-serif;
 }
 .logo span{
 	font-weight: bolder !important;
@@ -600,3 +599,11 @@ ul.social-links i{
   font-size: 24px;
   color: #F8694A;
 }
+
+/*------------------- CHECKOUT PAGE--------------------*/
+.order-summary input[type=number]{
+  text-align: center;
+}
+
+
+/*------------------- / CHECKOUT PAGE--------------------*/
