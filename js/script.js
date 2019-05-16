@@ -14,10 +14,10 @@ function ShowSignupForm(){
 
 	$(".deals-slider").slick({
         dots: true,
-        autoplay:false,
+        autoplay: true,
         autoplaySpeed:1500,
         speed: 100,
-        infinite: true,
+        infinite:true,
         slidesToShow: 3,
         slidesToScroll: 1,
         responsive: [
@@ -26,7 +26,7 @@ function ShowSignupForm(){
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
-        infinite: true,
+        infinite:true,
         dots: false
       }
     },
@@ -53,7 +53,7 @@ function ShowSignupForm(){
       
       $(".latests-slider").slick({
         dots: true,
-        autoplay:false,
+        autoplay:true,
         autoplaySpeed:1500,
         speed: 100,
         infinite: true,
@@ -91,7 +91,7 @@ function ShowSignupForm(){
 
       $(".picks-slider").slick({
         dots: true,
-        autoplay:false,
+        autoplay: true,
         autoplaySpeed:1500,
         speed: 100,
         infinite: true,

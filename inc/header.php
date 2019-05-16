@@ -27,6 +27,11 @@
     <!-- Slick Slider -->
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="stylesheet" media="screen, projection" href="css/drift-basic.css">
+	
+	<!-- Favicon -->
+	<link rel="icon" href="./img/favicon.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon"/>
 	
 
 </head>
@@ -37,11 +42,11 @@
         <section>
             <nav class="navbar navbar-dark bg-orange py-2">
                 <div class="container">
-                <a class="logo" href="#"><h2 class="text-center"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
+                <a class="logo" href="index.php"><h2 class="text-center"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
                 <div class="">
                     <ul class="navbar-nav" style="flex-direction: row;">
-                        <li class="nav-item ml-2"> <span class="main-icon"><i class="fa fa-user" aria-hidden="true"></i></span> <a href=""> Login</a> </li>
-                        <li class="nav-item ml-4"> <span class="main-icon" style="padding: 5px 9px 5px 7px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <a href=""> Cart <span class="badge rounded-badge text-small custom-badge-light">5</span> </a> </li>
+                        <li class="nav-item ml-2"> <span class="main-icon"><i class="fa fa-user" aria-hidden="true"></i></span> <a href="login.php"> Login</a> </li>
+                        <li class="nav-item ml-4"> <span class="main-icon" style="padding: 5px 9px 5px 7px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <a href="cart.php"> Cart <span class="badge rounded-badge text-small custom-badge-light">5</span> </a> </li>
                     </ul>
                 </div>
             </div>
@@ -61,67 +66,32 @@
                         <div class="collapse navbar-collapse" id="navbarColor02">
                            <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
-                                <a class="nav-link" href="#"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Home</span> <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="index.php"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Home</span> <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                       Categories
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                           Women
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               Men
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </li>
+                                
+                                
                                 <li class="nav-item">
-                                <a class="nav-link" href="#">Kids</a>
+                                    <a class="nav-link" href="category.php?cat=Men">Men</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="category.php?cat=Women">Women</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#">Shoes</a>
+                                <a class="nav-link" href="category.php?cat=Kids">Kids</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#">Offers</a>
+                                <a class="nav-link" href="category.php?cat=Shoes">Shoes</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#">Bags</a>
+                                <a class="nav-link" href="category.php?cat=Phones">Phones</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                           More
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="category.php?cat=Electronics">Electronics</a>
                                 </li>
                            </ul>
                            <div class="ml-auto">
-                            <a href=""><i class="fa fa-search text-white"></i></a>
+                            <a class="text-orange" href="orders.php">My Orders</a>
                            </div>
                         </div>
                     </div>
