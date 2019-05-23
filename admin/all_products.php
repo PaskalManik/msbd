@@ -9,15 +9,12 @@
 
       include './inc/header.php';
       include './inc/sidebar.php';
+      
+      include './inc/db_connect.php';
 
     ?>
       
   
-  <!-- Database Connection -->
-    <?php 
-       $conn = mysqli_connect("localhost", "root", "");
-       mysqli_select_db($conn, "eshop");
-    ?>
 
 
   <!-- main content here -->
@@ -34,7 +31,7 @@
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
          
-            <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+            <li class="breadcrumb-item active" aria-current="page">All Products</li>
          
           </ol>
          
@@ -52,53 +49,39 @@
               <div class="col-md-10 my-3">
                 <h3 class="text-orange text-center py-1">All Product</h3>
                 <!-- All products  -->
+
+              <?php 
+
+                 $res = mysqli_query($conn, "SELECT * FROM products");
+                            
+                    while($row = mysqli_fetch_array($res)) {
+
+                      ?>
                 <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5">
+                  <div class="row my-3">
                       <div class="col-3">
-                          <span class="d-inline-block align-middle"><img class="img-fluid p-2 d-inline-block" src="./product_img/8d76722e605cfebf181b46759e9abef9banner11.jpg"></span>
+                          <span class="d-inline-block align-middle"><img class="img-fluid product-img p-2 d-inline-block" src="<?php echo $row['product_img']; ?> "></span>
                       </div>
                       <div class="col-7">
                           <a class="py-2" href="">
-                              <h5 class="my-3">Product Name Here</h5>
-                          </a>
+                              <h5 class="my-3"> <?php echo $row['product_name']; ?> </h5>
+                            </a>
+                            <p>Price: <?php echo $row['product_price']; ?></p>
+                            <p>Category: <?php echo $row['product_category']; ?></p>
+                            <p>Qty: <?php echo $row['product_qty'].' (<span class=text-orange>Left</span>)'; ?></p>
                       </div>
                       <div class="col-2">
-                            <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
+                            <button class="btn custom-btn my-5"> <i class="fa fa-eye"></i> View</button>
                            </div>
                   </div>
                 </div>
 
-                <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5">
-                      <div class="col-3">
-                          <span class="d-inline-block align-middle"><img class="img-fluid p-2 d-inline-block" src="./product_img/8d76722e605cfebf181b46759e9abef9banner11.jpg"></span>
-                      </div>
-                      <div class="col-7">
-                          <a class="py-2" href="">
-                              <h5 class="my-3">Product Name Here</h5>
-                          </a>
-                      </div>
-                      <div class="col-2">
-                            <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
-                           </div>
-                  </div>
-                </div>
+                    <?php
 
-                <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5">
-                      <div class="col-3">
-                          <span class="d-inline-block align-middle"><img class="img-fluid p-2 d-inline-block" src="./product_img/8d76722e605cfebf181b46759e9abef9banner11.jpg"></span>
-                      </div>
-                      <div class="col-7">
-                          <a class="py-2" href="">
-                              <h5 class="my-3">Product Name Here</h5>
-                          </a>
-                      </div>
-                      <div class="col-2">
-                            <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
-                           </div>
-                  </div>
-                </div>
+
+                    }
+
+               ?>
 
               </div>
 
@@ -108,30 +91,7 @@
         </div>
       </section>
         
-      <?php 
-        
-        if (isset($_POST["add_product"])) {
-          
-          $v1 = rand(1111,9999);
-          $v2 = rand(1111,9999);
-          $v3 = $v1.$v2;
 
-          $v3 = md5($v3);
-
-          $fnm = $_FILES["pimage"]["name"];
-          $destn = "./product_img/".$v3.$fnm;
-          $destn1 = "product_img/".$v3.$fnm;
-          move_uploaded_file($_FILES["pimage"]["tmp_name"],$destn);
-
-
-          mysqli_query($conn, " INSERT INTO products(product_name, product_price, product_qty, product_img, product_category, product_description) values('$_POST[pname]', $_POST[pprice], $_POST[pqty], '$destn1', '$_POST[pcategory]', '$_POST[pdesc]')"); 
-
-
-
-        }
-
-       ?> 
-        
         <!-- / Page Content -->
 
       <!-- /.container-fluid -->

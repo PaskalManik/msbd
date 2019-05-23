@@ -1,9 +1,33 @@
 
 <?php
-    session_start();
+    ob_start();
+
+    
     include './inc/header.php';
 
     $_SESSION["ref"] = "cart";
+
+
+    if (!empty($_COOKIE['item'])){
+
+        foreach ($_COOKIE['item'] as $name1 => $value) {
+
+            if(isset($_POST["delete$name1"])) {
+
+                setcookie("item[$name1]", "", time()-1800);
+
+                ?>
+                
+                <script type="text/javascript">
+                    window.location.href = window.location.href;
+                </script>
+
+                <?php
+            }
+        }
+    }
+
+
 ?>
 
 <!-- Beardcumb -->     
@@ -84,7 +108,11 @@
                                         <td class="price text-center"><strong>₹<?php echo $values11[2]?></strong></td>
                                         <td class="qty text-center"><input class="input" type="number" value="<?php echo $values11[3]?>" readonly></td>
                                         <td class="total text-center"><strong class="primary-color">₹<?php echo $values11[4]?></strong></td>
-                                        <td class="text-right"><button class="btn custom-btn"><i class="fa fa-close text-white"></i></button></td>
+                                        <td class="text-right">
+                                            <form method="POST" action="">
+                                                <button class="btn custom-btn" name="delete<?php echo $name1; ?>"><i class="fa fa-close text-white"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
 
 
@@ -151,4 +179,5 @@
 
     <?php 
         include './inc/footer.php';
+        ob_end_flush();
     ?>

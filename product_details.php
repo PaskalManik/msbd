@@ -2,8 +2,7 @@
 <?php
     ob_start();
 
-    session_start();
-    
+   
     include './inc/header.php';
     include './inc/db_connect.php';
 
@@ -323,12 +322,29 @@
                   $total = $values11[2]*$qty;
 
                     setcookie("item[$name1]",$p_img."__".$p_name."__".$p_price."__".$qty."__".$total,time()+1800); // updating cookie
+
+                    ?>
+        
+                    <script type="text/javascript">
+                                window.location.href = window.location.href;
+                    </script>
+
+                    <?php
+                    
                     }
                 }
             }
 
             if($found == 0){
                  setcookie("item[$d]",$p_img."__".$p_name."__".$p_price."__".$qty."__".$total,time()+1800); // setting old cookie
+
+                 ?>
+        
+                <script type="text/javascript">
+                            window.location.href = window.location.href;
+                </script>
+
+                <?php
             }
         }
 
@@ -336,12 +352,25 @@
 
         setcookie("item[$d]",$p_img."__".$p_name."__".$p_price."__".$qty."__".$total,time()+1800); // setting new cookie
 
+        ?>
+
+        <script type="text/javascript">
+                    window.location.href = window.location.href;
+        </script>
+
+        <?php
+
         }
 
         $_SESSION['d'] = $d;
 
        }
 
+       ?>
+            <!-- <script type="text/javascript">
+                    window.location.href = window.location.href;
+            </script> -->
+       <?php
 
      ?>
 

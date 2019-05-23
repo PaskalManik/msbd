@@ -3,7 +3,8 @@
 	session_start();
 
 	include './inc/db_connect.php';
-// $_SESSION['otp'] = 0;
+
+echo $_SESSION['otp'];
 
 	
 ?>
@@ -15,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title>Reset Password - AxmMart</title>
+	<title>Reset Password - E-CART</title>
 
 	<!-- Google fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -114,18 +115,33 @@
 
 				if (isset($_SESSION['otp'])) {
 
-					// if (isset($_POST['reset-pwd'])) {
+					if (isset($_POST['reset-pwd'])) {
 
-					// 	$otp = $_POST['otp'];
-					// 	$uemail = $_POST['email'];
+						$temp_otp = $_POST['otp'];
+						$temp_email = $_POST['email'];
 
-					// 	if ($_SESSION['otp'] === $otp && $_SESSION['otp_email'] === $uemail) {
+						if ($temp_otp == $_SESSION['otp'] &&  $temp_email == $_SESSION['otp_email']) {
+
+							echo 'password changed';
 							
+							?>
+					    <script type="text/javascript"> alert('Your password was reset was successful. Login to continue.'); </script>
 
-					// 	}
-					// }
+							<?php
+						}
+
+						else {
+							?>
+							<script type="text/javascript">
+								alert("OTP was incorrect");
+							</script>
+							<?php
+						}
+					}
 					
-				} else {
+				} 
+
+				else {
 
 					if (isset($_POST['reset-pwd'])) {
 
@@ -141,9 +157,10 @@
 
 						$_SESSION['otp_email'] = $_POST['email'];
 						
-						$otp = mt_rand(100000, 999999);
+						$new_otp = mt_rand(100000, 999999);
 
-						$_SESSION['otp'] = $otp;
+						
+						$_SESSION['otp'] = $new_otp;
 
 
 						// sending otp 
@@ -163,7 +180,7 @@
 						</div>
 						<br>
 						<div>
-							<h1>Your OTP for password reset is : <br> <br> <span style='color: #F8694A'>782630 </span> </h1>
+							<h1>Your OTP for password reset is : <br> <br> <span style='color: #F8694A'> $new_otp </span> </h1>
 							<br>
 							
 							* Incase you have not requested for password reset ignore this mail.
@@ -184,6 +201,8 @@
 						// $headers .= 'Cc: myboss@example.com' . "\r\n";
 
 						mail($to,$subject,$message,$headers);
+
+						header('Location: reset-password.php');
 
 					} else {
 

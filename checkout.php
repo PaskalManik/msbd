@@ -1,7 +1,6 @@
 <?php
 ob_start();
 
-session_start();
 
 include './inc/header.php';
 include './inc/db_connect.php';
@@ -68,31 +67,31 @@ if (!isset($_SESSION['loggedin'])) {
 			<form method="POST" action="" class="my-4">
 				<div class="form-group">
 			    <label>First Name</label>
-			    <input type="text" class="form-control" placeholder="First Name" name="fname">
+			    <input type="text" class="form-control" placeholder="First Name" name="fname" required>
 			  </div>
 			  <div class="form-group">
 			   <label>Last Name</label>
-			    <input type="text" class="form-control" placeholder="Last Name" name="lname">
+			    <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
 			  </div>
 			  <div class="form-group">
 			    <label>Email</label>
-			    <input type="email" class="form-control" autocomplete="off" placeholder="Enter email" name="email">
+			    <input type="email" class="form-control" autocomplete="off" placeholder="Enter email" name="email" required>
 			  </div>
 			  <div class="form-group">
 			   <label>Address</label>
-			    <input type="text" class="form-control" placeholder="Address" name="address">
+			    <input type="text" class="form-control" placeholder="Address" name="address" required>
 			  </div>
 			  <div class="form-group">
 			   <label>City</label>
-			    <input type="text" class="form-control" placeholder="City" name="city">
+			    <input type="text" class="form-control" placeholder="City" name="city" required>
 			  </div>
 			  <div class="form-group">
 			   <label>PIN Code</label>
-			    <input type="text" class="form-control" placeholder="PIN Code" name="pin">
+			    <input type="text" class="form-control" placeholder="PIN Code" name="pin" required>
 			  </div> 
 			  <div class="form-group">
 			   <label>Contact No.</label>
-			    <input type="text" class="form-control" placeholder="Contact No." name="contact_no">
+			    <input type="text" class="form-control" placeholder="Contact No." name="contact_no" required>
 			  </div>
 			  
 		</div>
@@ -163,7 +162,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 			$values11 = explode("__", $value);
 
-			mysqli_query($conn, "INSERT INTO orders(user_id, product_name, product_price, product_qty, product_img, order_total, address, firstname, lastname, email, contact_no, city, pincode, payment_mode, order_date, order_status) VALUES($user_id, '$values11[1]', '$values11[2]', '$values11[3]', '$values11[0]', '$values11[4]', '$_POST[address]', '$_POST[fname]', '$_POST[lname]', '$_POST[email]', '$_POST[contact_no]', '$_POST[city]', '$_POST[pin]', '$_POST[payment_mode]', '$date', 'new' ) ");
+			mysqli_query($conn, "INSERT INTO orders(user_id, product_name, product_price, product_qty, product_img, order_total, address, firstname, lastname, email, contact_no, city, pincode, payment_mode, order_date, order_status) VALUES($user_id, '$values11[1]', '$values11[2]', '$values11[3]', '$values11[0]', '$values11[4]', '$_POST[address]', '$_POST[fname]', '$_POST[lname]', '$_POST[email]', '$_POST[contact_no]', '$_POST[city]', '$_POST[pin]', '$_POST[payment_mode]', '$date', 'Approved' ) ");
 		}
 
 			$_SESSION['order_placed'] = true;
@@ -173,6 +172,66 @@ if (!isset($_SESSION['loggedin'])) {
 				setcookie("item[$i]","",time() - 3600);
 
 			}
+
+
+				// send order confirmation in mail
+				
+				
+				
+
+						$to = $_SESSION['user_email'];
+
+						$subject = "Your Recent Order was Successful - ECART";
+
+						$message = "
+						<html>
+						<head>
+						<title>Your Recent Order was Successful - ECART</title>
+							<style>
+							.text-center{
+							text-align: center;
+							}
+							.text-orange{
+								color: #F8694A;
+							}
+							</style>
+
+							</head>
+							<body class='text-center' style='background-color: #F7F7F7'>
+							<div>
+							<h1 class='text-center'><span style='color: #F8694A'>E-</span><span>CART</span> </h1>
+							</div>
+							<br>
+							<div>
+
+								<div class='container'>
+								<div class='order custom-card px-3 my-4'>
+									<h2>Hello, $_SESSION[firstname]</h2>
+									<h1>Your Order at <span style='color: #F8694A'>E-</span>CART was Successful. </h1>
+								</div>
+								<div>
+								</div>
+							</div>
+								
+								<strong> <p class='my-4'> Your order is currently under processing and will soon be dispatched.</p> </strong>
+								<br>
+								<br>
+								<h4 class='text-orange'>Happy Shopping!</h4>
+								
+							</div>
+							</body>
+							</html>
+						";
+
+						// Always set content-type when sending HTML email
+						$headers = "MIME-Version: 1.0" . "\r\n";
+						$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+						// More headers
+						$headers .= 'From: admin@ecart.cf' . "\r\n";
+						// $headers .= 'Cc: myboss@example.com' . "\r\n";
+
+						mail($to,$subject,$message,$headers);
 
 				
 				// redirect user to order success page

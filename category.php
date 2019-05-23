@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h6 class="py-1"> <a href="product_details.php?id=<?php echo $row["id"] ?>">₹<?php echo $row["product_name"] ?></a> </h6>
+                                    <h6 class="py-1"> <a href="product_details.php?id=<?php echo $row["id"] ?>"><?php echo $row["product_name"] ?></a> </h6>
                                     <div class="row py-3">
                                         <div class="col-12 text-center">
                                             <a href="product_details.php?id=<?php echo $row["id"] ?>" class="btn custom-btn btn-block font-sm"><i class="fa fa-eye text-white" aria-hidden="true"></i> QUICK LOOK </a>

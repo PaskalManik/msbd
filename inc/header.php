@@ -1,3 +1,21 @@
+    <?php 
+
+    session_start();
+
+    // checking no of items in cart
+
+    $total_item = 0;
+
+
+        if (!empty($_COOKIE['item'])){
+
+            foreach ($_COOKIE['item'] as $name1 => $value) {
+
+                $total_item = $total_item + 1;
+            }
+        }
+
+     ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,11 +60,45 @@
         <section>
             <nav class="navbar navbar-dark bg-orange py-2">
                 <div class="container">
-                <a class="logo" href="index.php"><h2 class="text-center"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
-                <div class="">
+                <a class="logo my-1" href="index.php"><h2 class="text-center"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
+                <div class=" my-1">
                     <ul class="navbar-nav" style="flex-direction: row;">
-                        <li class="nav-item ml-2"> <span class="main-icon"><i class="fa fa-user" aria-hidden="true"></i></span> <a href="login.php"> Login</a> </li>
-                        <li class="nav-item ml-4"> <span class="main-icon" style="padding: 5px 9px 5px 7px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <a href="cart.php"> Cart <span class="badge rounded-badge text-small custom-badge-light">5</span> </a> </li>
+                        
+                        <li class="nav-item ml-2 dropdown"> <span class="main-icon"><i class="fa fa-user" aria-hidden="true"></i></span> 
+                        <a href="<?php if (isset($_SESSION['loggedin'])) { echo 'javascript:void(0);'; } else { echo 'login.php'; } ?>" id="dropdown"> 
+                            <?php if (isset($_SESSION['loggedin'])) {
+                            
+                                echo 'Hi, '.$_SESSION['firstname'];
+                                ?>
+                                <i class="fa fa-angle-down"></i> </a> 
+                                <div class="dropdown-content">
+                                  <a href="orders.php">My Orders</a>
+                                  <a href="logout.php">Logout</a>
+                                </div>
+
+                                <?php
+
+                            } else {
+                                echo 'LOGIN';
+                            }
+
+                            ?> 
+
+                        
+                        </li>
+
+                        <li class="nav-item ml-4"> <span class="main-icon" style="padding: 5px 9px 5px 7px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <a href="cart.php"> Cart 
+							<?php
+							// display no of items on cart
+							if (!empty($_COOKIE['item'])){
+								?>
+								<span class="badge rounded-badge text-small custom-badge-light"> <?php  echo $total_item; ?> </span> 
+								<?php
+						}
+
+						?>
+                        	</a> </li>
+
                     </ul>
                 </div>
             </div>
@@ -90,9 +142,6 @@
                                     <a class="nav-link" href="category.php?cat=Electronics">Electronics</a>
                                 </li>
                            </ul>
-                           <div class="ml-auto">
-                            <a class="text-orange" href="orders.php">My Orders</a>
-                           </div>
                         </div>
                     </div>
                 </nav>

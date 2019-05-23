@@ -1,4 +1,34 @@
 
+/*----------------- Header Start --------------------- */
+
+/* show dropdown when clicked */
+
+$('#dropdown').click(function () {
+
+  $('.dropdown-content').toggle('.show');
+
+})
+
+
+/* Hide dropdown when clicked elsewhere  */
+
+
+$(document).mouseup(function(e) 
+{
+    var container = $(".dropdown-content");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+        container.hide();
+    }
+});
+
+
+/*----------------- Header End --------------------- */
+
+
+
 function ShowLoginForm(){
 		document.getElementById("signup").style.display = "none";
 		document.getElementById("login").style.display = "block";

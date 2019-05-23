@@ -10,14 +10,10 @@
       include './inc/header.php';
       include './inc/sidebar.php';
 
+      include './inc/db_connect.php';
+
     ?>
       
-  
-  <!-- Database Connection -->
-    <?php 
-       $conn = mysqli_connect("localhost", "root", "");
-       mysqli_select_db($conn, "eshop");
-    ?>
 
 
   <!-- main content here -->
@@ -34,7 +30,7 @@
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
          
-            <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+            <li class="breadcrumb-item active" aria-current="page">All Users</li>
          
           </ol>
          
@@ -57,15 +53,32 @@
                             <th>View user details</th> 
                         </tr>
                         </thead>
-                        <tr>
-                            <td>#001</td>
-                            <td>Abc </td> 
-                             <td> 
-                            <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
-                           </div></td> 
-                     
-                        </tr>
-                         <tr>
+
+                    <?php 
+
+
+                    $res = mysqli_query($conn, "SELECT * FROM users");
+                            
+                    while($row = mysqli_fetch_array($res)) {
+
+                      ?>
+                          <tr>
+                              <td>#<?php echo $row['user_id'];  ?></td>
+                              <td><?php echo $row['firstname'].' '.$row['lastname']  ?></td> 
+                              <td> 
+                              <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
+                              </div></td> 
+                         </tr>
+
+
+                      <?php
+
+                        }
+
+                      ?>
+                        
+                        
+                         <!-- <tr>
                             <td>#002</td>
                             <td>Abc</td> 
                                  <td> 
@@ -78,7 +91,7 @@
                                  <td> 
                             <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
                            </div></td> 
-                        </tr>
+                        </tr> -->
                     </table>
 
                   </div>

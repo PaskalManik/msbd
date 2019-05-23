@@ -10,14 +10,10 @@
       include './inc/header.php';
       include './inc/sidebar.php';
 
+      include './inc/db_connect.php';
+
     ?>
       
-  
-  <!-- Database Connection -->
-    <?php 
-       $conn = mysqli_connect("localhost", "root", "");
-       mysqli_select_db($conn, "eshop");
-    ?>
 
 
   <!-- main content here -->

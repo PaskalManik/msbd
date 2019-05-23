@@ -1,7 +1,6 @@
 
 <?php
     ob_start();
-    session_start();
 
     include './inc/header.php';
     include './inc/db_connect.php';

@@ -107,6 +107,7 @@
 							$pwd = hash('sha1',$_POST['lpassword']);
 
 							$res = mysqli_query($conn, "SELECT * FROM users WHERE email='$_POST[lemail]' && password='$pwd' ");
+							
 							if ($row = mysqli_fetch_array($res)) {
 								
 								$_SESSION['loggedin'] = true;
