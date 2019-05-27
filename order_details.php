@@ -29,6 +29,8 @@
                             
                     while($row = mysqli_fetch_array($res)) {
 
+                        $uid = $row['user_id'];
+
                     ?>
 
                         <div class="row mt-4">
@@ -69,19 +71,87 @@
                 </div>
                 </div>
                 <div class="text-center my-5">
-                    <h6>Need help with your order? <a href="javascript:void(0);" class="text-orange btn custom-btn">Contact us</a></h6>
+                    <h6>Need help with your order? <a href="javascript:void(0);" class="text-orange btn custom-btn"  data-toggle="modal" data-target="#exampleModal">Contact us</a></h6>
+                   <!-- Button trigger modal -->
                 </div>
             </div>
         </div>
         </div>
     </div>
 
+    <?php
 
-                    <?php
+        }
 
-                }
+    ?>
 
-             ?>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Submit Issue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+            <div class="form-group">
+                <label>Subject</label>
+                <select class="form-control" name="subject">
+                <option>Select your issue</option>
+                <option value="Size Issue">Size Issue</option>
+                <option value="Item not Received">Item not Received</option>
+                <option value="Defect Item Received">Defect Item Received</option>
+                <option value="Color Issue">Color Issue</option>
+                <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control" rows="3" name="message" placeholder="Enter Message.."></textarea>
+            </div>
+                    
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="javascript:void(0);" id="btn1" class="btn custom-btn" name="submit">Submit</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+    $('#btn1').click(function(){
+
+        alert('clicked');
+
+    })
+</script>
+<?php  
+
+
+
+// submiting user issue to db
+
+
+if(isset($_POST["submit"])) {
+
+    
+
+         if( mysqli_query($conn, " INSERT INTO tickets (order_id,user_id,subject,message,status) VALUES($oid, $uid, '$_POST[subject]','$_POST[message]', 'In Process') ") ){
+        
+         echo "click";
+         }
+
+             }
+
+       ?>
+
+<!--end modal-->
 
             
 
