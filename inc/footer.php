@@ -35,7 +35,13 @@
                 </div>
                 <div class="col-md-3">
                     <p class="text-orange">CONTACT US</p>
-                    <p>Get in touch.</p>
+                    <p> Get in touch.</P>
+
+<!--end modal-->  
+
+
+
+
                     <ul class="p-0" style="list-style: none;">
                         <li> <i class="fa fa-envelope text-white m-2" aria-hidden="true"></i> <a href="mailto:help@e-cart.com" class="text-white">help@e-cart.com</a></li>
                         <li> <i class="fa fa-phone text-white m-2" aria-hidden="true"></i> <a href="tel:+919800126181" class="text-white">+91 (980)-012-6181</a></li>

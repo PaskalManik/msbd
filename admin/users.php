@@ -44,15 +44,16 @@
 
 
                 <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5 mx-5 table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                        <tr>
-                            <th>#User ID</th> 
-                            <th>Username</th> 
-                            <th>View user details</th> 
-                        </tr>
-                        </thead>
+                  <div class="row my-5 mx-5 ">
+                        <table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#User ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">View user details</th>
+           
+        </tr>
+    </thead>
 
                     <?php 
 

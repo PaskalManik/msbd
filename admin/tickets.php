@@ -40,29 +40,50 @@
         <!-- Page Content -->
 
       <section>
-                <h3 class="text-orange text-center py-1">All Users</h3>
+                <h3 class="text-orange text-center py-1">Tickets</h3>
 
 
                 <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5 mx-5 table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                        <tr>
-                            <th>Ticket no</th> 
-                            <th>Name</th> 
-                            <th>Status</th>
-                              <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <td>#001</td>
-                            <td>Abc</td> 
-                            <td>abc</td>
-                            <td>1/1/19</td>
-                        </tr>
-                </thead> 
-                </table>
+                  <div class="row my-5 mx-5 ">
+         <table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Ticket ID</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Message</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+                            
+                <!--insert query-->
+                <?php
+                  $query = "INSERT INTO tickets VALUES('11','503','1001','About the order','Good','Received')";
+                  $disp = "SELECT * FROM tickets";
+                  mysqli_query($conn,$query);
+                    $data = mysqli_query($conn,$disp);
+                   // $result = mysqli_fetch_assoc($data);
+                       while( $result = mysqli_fetch_assoc($data))
+              {  
+                ?>
 
+                 <tr>
+               
+                            <td> <?php echo $result['ticket_id']; ?> </td>
+                            <td> <?php echo $result['order_id']; ?> </td>
+                            <td> <?php echo $result['user_id']; ?> </td>
+                            <td> <?php echo $result['subject']; ?> </td>
+                            <td> <?php echo $result['message']; ?> </td>
+                            <td> <?php echo $result['status']; ?> </td>
+                           
+                        </tr>
+            
+                <?php
+              }
+                ?>
+           </table>
+ 
                   </div>
                 </div>
          </section>
