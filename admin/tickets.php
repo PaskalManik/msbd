@@ -30,7 +30,7 @@
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
          
-            <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+            <li class="breadcrumb-item active" aria-current="page">Tickets</li>
          
           </ol>
          
@@ -40,9 +40,7 @@
         <!-- Page Content -->
 
       <section>
-                <h3 class="text-orange text-center py-1">All Users</h3>
-
-
+                <h3 class="text-orange text-center py-1">Tickets</h3>
                 <div class="order px-3 my-4 custom-card">
                   <div class="row my-5 mx-5 table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

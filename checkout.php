@@ -125,7 +125,7 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 
 			<div class="form-check">
-			  <input class="form-check-input" name="payment_mode" type="checkbox" value="COD" checked>
+			  <input class="form-check-input" name="payment_mode" type="checkbox" value="COD" checked required>
 			  <label class="form-check-label" for="defaultCheck1">
 			    Cash on delivery (COD)
 			  </label>

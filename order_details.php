@@ -1,4 +1,5 @@
 <?php
+
     ob_start();
     
     include "./inc/header.php";
@@ -100,7 +101,7 @@
         <form method="POST">
             <div class="form-group">
                 <label>Subject</label>
-                <select class="form-control" name="subject">
+                <select class="form-control" name="subject" required>
                 <option>Select your issue</option>
                 <option value="Size Issue">Size Issue</option>
                 <option value="Item not Received">Item not Received</option>
@@ -111,26 +112,18 @@
             </div>
             <div class="form-group">
                 <label>Message</label>
-                <textarea class="form-control" rows="3" name="message" placeholder="Enter Message.."></textarea>
-            </div>
-                    
-        </form>
-      </div>
+                <textarea class="form-control" rows="3" name="message" placeholder="Enter Message.." required></textarea>
+            </div>  
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="javascript:void(0);" id="btn1" class="btn custom-btn" name="submit">Submit</a>
+        <button type="submit" class="btn custom-btn" name="submit-btn">Submit</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
-<script>
 
-    $('#btn1').click(function(){
-
-        alert('clicked');
-
-    })
-</script>
 <?php  
 
 
@@ -138,16 +131,29 @@
 // submiting user issue to db
 
 
-if(isset($_POST["submit"])) {
+if(isset($_POST["submit-btn"])) {
 
-    
+            $msg = htmlentities($_POST['message']);
 
-         if( mysqli_query($conn, " INSERT INTO tickets (order_id,user_id,subject,message,status) VALUES($oid, $uid, '$_POST[subject]','$_POST[message]', 'In Process') ") ){
-        
-         echo "click";
+         if(! mysqli_query($conn, " INSERT INTO tickets (order_id,user_id,subject,message,status) VALUES($oid, $uid, '$_POST[subject]','$msg', 'In Process') ") ) {
+
+            echo("Error description: " . mysqli_error($conn));
+            ?>
+            <script type="text/javascript">
+                alert("Opps! Some error occured.");
+            </script>
+            <?php
+            } 
+            else{
+            ?>
+                <script type="text/javascript">
+                    alert("Issue successfully submitted. We'll contact you soon.");
+                </script>
+            <?php
+         
          }
 
-             }
+        }
 
        ?>
 

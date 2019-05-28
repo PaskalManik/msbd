@@ -31,7 +31,7 @@
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
          
-            <li class="breadcrumb-item active" aria-current="page">All Products</li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
          
           </ol>
          
@@ -47,7 +47,7 @@
               </div>
 
               <div class="col-md-10 my-3">
-                <h3 class="text-orange text-center py-1">All Product</h3>
+                <h3 class="text-orange text-center py-1">Products</h3>
                 <!-- All products  -->
 
               <?php 
@@ -71,7 +71,7 @@
                             <p>Qty: <?php echo $row['product_qty'].' (<span class=text-orange>Left</span>)'; ?></p>
                       </div>
                       <div class="col-2">
-                            <button class="btn custom-btn my-5"> <i class="fa fa-eye"></i> View</button>
+                            <a href="product-edit.php?id=<?php echo $row['id']?>" class="btn custom-btn my-5"> <i class="fa fa-pencil"></i> Edit</a>
                            </div>
                   </div>
                 </div>
