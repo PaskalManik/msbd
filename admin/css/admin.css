@@ -10724,3 +10724,8 @@ body.sidebar-toggled footer.sticky-footer {
 table td,th{
   text-align: center !important;
 }
+
+.thumbnail{
+  height: 100px;
+  width: 100px;
+}
