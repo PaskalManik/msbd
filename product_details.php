@@ -94,7 +94,7 @@
                                 
 
                                 ?>
-                            </p>
+                            </p
                             <p><strong>Brand :</strong>  <?php echo $row["product_brand"] ?> </p>
                             <p> 
                                 <?php echo $row["product_description"] ?>
@@ -102,19 +102,48 @@
                         </div>
                         <hr class="py-2">
                         <div class="product-options">
-                            <ul class="p-0 size-option">
-                                <li><span class="text-uppercase">Size:</span></li>
-                                <li class="active"><a href="#">S</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">SL</a></li>
-                            </ul>
-                            <ul class="p-0 color-option">
+                            <?php 
+
+                            if ($row["product_category"] == 'Shoes' || $row["product_category"] == 'Men' || $row["product_category"] == 'Women' ) {
+                               
+                               ?>
+                                <ul class="p-0 size-option">
+                                    <li><span class="text-uppercase">Size:</span></li>
+                                    <li class="active"><a href="#">S</a></li>
+                                    <li><a href="#">XL</a></li>
+                                    <li><a href="#">SL</a></li>
+                                </ul>
+                                <ul class="p-0 color-option">
+                                    <li><span class="text-uppercase">Color:</span></li>
+                                    <li class="active"><a href="#" style="background-color:#475984;"></a></li>
+                                    <li><a href="#" style="background-color:#8A2454;"></a></li>
+                                    <li><a href="#" style="background-color:#BF6989;"></a></li>
+                                    <li><a href="#" style="background-color:#9A54D8;"></a></li>
+                                </ul>
+                               <?php
+
+                            }
+
+                            else{
+
+                                ?>
+                                
+                                <ul class="p-0 color-option">
                                 <li><span class="text-uppercase">Color:</span></li>
                                 <li class="active"><a href="#" style="background-color:#475984;"></a></li>
                                 <li><a href="#" style="background-color:#8A2454;"></a></li>
                                 <li><a href="#" style="background-color:#BF6989;"></a></li>
                                 <li><a href="#" style="background-color:#9A54D8;"></a></li>
-                            </ul>
+                                </ul>
+
+                                <?php
+
+
+                            }
+
+
+                             ?>
+                
                         </div>
                         <form name="add-cart-form" action="" method="POST">
                         <div class="d-inline-block my-3">

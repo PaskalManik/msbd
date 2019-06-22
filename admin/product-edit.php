@@ -59,6 +59,10 @@
                       $res = mysqli_query($conn, "SELECT * FROM products WHERE id=$pid");
                                         
                       while($row = mysqli_fetch_array($res)) {
+
+                        $pimg_arr = $row['product_preview'];
+
+                        $pimg_arr = unserialize($pimg_arr);
                       
                         ?>
 
@@ -91,11 +95,17 @@
                     <input type="file" class="form-control-file" name="pimg2">
                     <input type="file" class="form-control-file" name="pimg3">
                     <input type="file" class="form-control-file" name="pimg4">
-                    <div style="height: 150px; width: 150px;">
+                    <div>
                       <?php 
 
                        ?>
-                      <img class="img-fluid" src="./<?php echo $row['product_img']; ?>" alt="">
+                      <div class="row">
+                          <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[0]; ?>"/></div>
+                          <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[1]; ?>"/></div>
+                          <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[2]; ?>"/></div>
+                          <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[3]; ?>"/></div>
+                      
+                    </div>
                     </div>
                   </div>
                   <div class="col-md-6 form-group py-2">
@@ -193,7 +203,7 @@
           $img_arr = serialize($img_arr);
         
 
-          if (!mysqli_query($conn, "UPDATE products SET product_name='$_POST[pname]' WHERE id=$pid ")) 
+          if (!mysqli_query($conn, "UPDATE products SET product_name='$_POST[pname]', product_category='$_POST[pcategory]', product_price=$_POST[pprice], product_old_price=$_POST[poldprice], product_brand='$_POST[pbrand]', product_qty=$_POST[pqty], product_slider='$_POST[pslider]', product_tag='$_POST[ptag]' WHERE id=$pid ")) 
 
           {
             
@@ -206,6 +216,7 @@
           ?>
           <script type="text/javascript">
             alert('Product added successfuly!');
+           window.location.href = window.location.href; 
           </script>
           
           <?php
