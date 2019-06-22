@@ -30,7 +30,7 @@
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
          
-            <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+            <li class="breadcrumb-item active" aria-current="page">Tickets</li>
          
           </ol>
          
@@ -41,8 +41,6 @@
 
       <section>
                 <h3 class="text-orange text-center py-1">Tickets</h3>
-
-
                 <div class="order px-3 my-4 custom-card">
                   <div class="row my-5 mx-5 ">
          <table class="table">
@@ -59,11 +57,9 @@
                             
                 <!--insert query-->
                 <?php
-                  $query = "INSERT INTO tickets VALUES('11','503','1001','About the order','Good','Received')";
                   $disp = "SELECT * FROM tickets";
-                  mysqli_query($conn,$query);
+                  //mysqli_query($conn,$query);
                     $data = mysqli_query($conn,$disp);
-                   // $result = mysqli_fetch_assoc($data);
                        while( $result = mysqli_fetch_assoc($data))
               {  
                 ?>

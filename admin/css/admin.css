@@ -10721,3 +10721,6 @@ body.sidebar-toggled footer.sticky-footer {
   content: "\f105";
 }
 
+table td,th{
+  text-align: center !important;
+}

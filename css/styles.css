@@ -652,7 +652,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .dropdown-content {
-  border-top: 2px solid orange;
+  border-top: 2.6px solid #F8694A;
   display: none;
   top: 40px;
   position: absolute;

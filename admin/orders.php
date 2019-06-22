@@ -29,7 +29,7 @@
           <ol class="breadcrumb arr-right bg-light ">
          
             <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
-         
+
             <li class="breadcrumb-item active" aria-current="page">All Orders</li>
          
           </ol>
@@ -73,7 +73,7 @@
                                       <p>Ordered by: <?php echo $row['firstname'].' '.$row['lastname'] ?></p>
                               </div>
                               <div class="col-md-2">
-                                    <button class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</button>
+                                    <a href="order-details.php?id=<?php echo $row['order_id'] ?>" class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</a>
                                    </div>
                           </div>
                       </div>
