@@ -16,8 +16,8 @@
 		<?php
 	}
 
-	$ref = $_SESSION["ref"];
 
+	$ref = '';
 		
 	if (isset($_GET['ref'])) {
 
