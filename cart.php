@@ -106,7 +106,7 @@
                                             <h5><?php echo $values11[1]?></h5>
                                         </td>
                                         <td class="price text-center"><strong>₹<?php echo $values11[2]?></strong></td>
-                                        <td class="qty text-center"><input class="input" type="number" value="<?php echo $values11[3]?>" readonly></td>
+                                        <td class="qty text-center"><input class="input" type="text" value="<?php echo $values11[3]?>" readonly></td>
                                         <td class="total text-center"><strong class="primary-color">₹<?php echo $values11[4]?></strong></td>
                                         <td class="text-right">
                                             <form method="POST" action="">

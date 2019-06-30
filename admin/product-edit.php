@@ -73,20 +73,39 @@
                   <div class="col-md-6 form-group py-2">
                     <label>Product Category:</label>
                     <select class="form-control" name="pcategory" value="<?php echo $row['product_category']; ?>" required>
-                      <option value="Men">Men Clothing</option>
-                      <option value="Women">Women Clothing</option>
+                      <option value="Men">Men</option>
+                      <option value="Women">Women</option>
+                      <option value="Boys">Boys</option>
+                      <option value="Girls">Girls</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Electronics">Electronics</option>
-                      <option value="Phones">Phones</option>
                       <option value="Shoes">Shoes</option>
                     </select>
                     <span class="pl-2 text-orange"> <small>Current: <?php echo $row['product_category']; ?> </small></span>
                   </div>
                   <div class="col-md-6 form-group py-2">
+                    <label>Product Sub-category:</label>
+                    <select class="form-control" name="psubcategory" required>
+                      <option value="Tshirts">T-shirts</option>
+                      <option value="Shoes">Shoes</option>
+                      <option value="Jeans">Jeans</option>
+                      <option value="Sarees">Sarees</option>
+                      <option value="Kurtas">Kurtas</option>
+                      <option value="Tops">Tops</option>
+                      <option value="Sandals">Sandals</option>
+                      <option value="SmartTVs">Smart TVs</option>
+                      <option value="Watches">Watches</option>
+                      <option value="Phones">Phones</option>
+                      <option value="Laptops">Laptops</option>
+                      <option value="Monitors">Monitors</option>
+                    </select>
+                    <span class="pl-2 text-orange"> <small>Current: <?php echo $row['product_subcategory']; ?> </small></span>
+                  </div>
+                  <div class="col-md-6 form-group py-2">
                     <label>Product Featured Image:</label>
                     <input type="file" class="form-control-file" name="pimage" >
-                    <div style="height: 150px; width: 150px;">
-                      <img class="img-fluid" src="./<?php echo $row['product_img']; ?>" alt="">
+                    <div style="height: 80px; width: 80px;">
+                      <img class="img-fluid thumbnail" src="./<?php echo $row['product_img']; ?>" alt="">
                     </div>
                   </div>
                   <div class="col-md-6 form-group py-2">
@@ -99,7 +118,7 @@
                       <?php 
 
                        ?>
-                      <div class="row">
+                      <div class="row py-2">
                           <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[0]; ?>"/></div>
                           <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[1]; ?>"/></div>
                           <div class="col"><img class="img-fluid thumbnail" src="./<?php echo $pimg_arr[2]; ?>"/></div>
@@ -108,7 +127,7 @@
                     </div>
                     </div>
                   </div>
-                  <div class="col-md-6 form-group py-2">
+                  <div class="col-md-6 form-group py-5 mt-3">
                     <label>Product Price:</label>
                     <input type="text" class="form-control" placeholder="Product Price" name="pprice" required value="<?php echo $row['product_price']; ?>">
                   </div>
@@ -128,7 +147,7 @@
                     <label>Slider(Appears on):</label>
                     <select class="form-control" name="pslider" required>
                       <option value="todays_deal">Todays Deals Slider</option>
-                      <option value="new">Latest Products SLider</option>
+                      <option value="new">New/Latest Products SLider</option>
                       <option value="no-slider">No Slider</option>
                     </select>
                     <span class="pl-2 text-orange"> <small>Current: <?php echo $row['product_slider']; ?> </small></span>
@@ -148,7 +167,7 @@
                       }
 
                      ?>
-                  <button type="submit" name="add_product" class="btn custom-btn btn-block my-2" value="upload">Add Product</button>
+                  <button type="submit" name="add_product" class="btn custom-btn btn-block my-2" value="upload">Edit Product</button>
                 </div>
                 </form>
               </div>
@@ -203,7 +222,7 @@
           $img_arr = serialize($img_arr);
         
 
-          if (!mysqli_query($conn, "UPDATE products SET product_name='$_POST[pname]', product_category='$_POST[pcategory]', product_price=$_POST[pprice], product_old_price=$_POST[poldprice], product_brand='$_POST[pbrand]', product_qty=$_POST[pqty], product_slider='$_POST[pslider]', product_tag='$_POST[ptag]' WHERE id=$pid ")) 
+          if (!mysqli_query($conn, "UPDATE products SET product_name='$_POST[pname]', product_category='$_POST[pcategory]', product_price=$_POST[pprice], product_old_price=$_POST[poldprice], product_brand='$_POST[pbrand]', product_qty=$_POST[pqty], product_slider='$_POST[pslider]', product_tag='$_POST[ptag]',product_subcategory='$_POST[psubcategory]' WHERE id=$pid ")) 
 
           {
             
@@ -215,7 +234,7 @@
 
           ?>
           <script type="text/javascript">
-            alert('Product added successfuly!');
+            alert('Product Updated successfuly!');
            window.location.href = window.location.href; 
           </script>
           

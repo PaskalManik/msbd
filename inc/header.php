@@ -42,6 +42,7 @@
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Custom Styles-->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
     <!-- Slick Slider -->
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
@@ -60,7 +61,7 @@
         <section>
             <nav class="navbar navbar-dark bg-orange py-2">
                 <div class="container">
-                <a class="logo my-1" href="index.php"><h2 class="text-center"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
+                <a class="logo my-1" href="index.php"><h2 class="text-center"> <img src="img/icon.png"> <span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
                 <div class=" my-1">
                     <ul class="navbar-nav" style="flex-direction: row;">
                         
@@ -122,24 +123,48 @@
                                 </li>
                                 
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="category.php?cat=Men">Men</a>
+                                <li class="nav-item dropdown2">
+                                    <a class="nav-link " href="category.php?cat=Men">Men <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
+                                    <div class="dropdown-content2 animated fadeInUp faster">
+                                      <a href="category.php?cat=Men&subcat=Tshirts">T-shirts</a>
+                                      <a href="category.php?cat=Men&subcat=Jeans">Jeans</a>
+                                      <a href="category.php?cat=Men&subcat=Shoes">Shoes</a>
+                                    </div>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="category.php?cat=Women">Women</a>
+                                <li class="nav-item dropdown2">
+                                    <a class="nav-link" href="category.php?cat=Women">Women <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
+                                    <div class="dropdown-content2 animated fadeInUp faster">
+                                      <a href="category.php?cat=Women&subcat=Sarees">Saree</a>
+                                      <a href="category.php?cat=Women&subcat=Jeans">Jeans</a>
+                                      <a href="category.php?cat=Women&subcat=Kurtas">Kurtas</a>
+                                      <a href="category.php?cat=Women&subcat=Tops">Tops</a>
+                                      <a href="category.php?cat=Women&subcat=Sandals">Sandals</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="category.php?cat=Kids">Kids</a>
+                                <li class="nav-item dropdown2">
+                                <a class="nav-link" href="javascript:void(0);">Kids <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
+                                <div class="dropdown-content2 animated fadeInUp faster">
+                                      <a href="category.php?cat=Boys&subcat=Tshirts">Boy's Clothing</a>
+                                      <a href="category.php?cat=Girls&subcat=Tops">Girl's Clothing</a>
+            
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="category.php?cat=Shoes">Shoes</a>
+                                <li class="nav-item dropdown2">
+                                <a class="nav-link" href="javascript:void(0);">Shoes <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
+                                    <div class="dropdown-content2 animated fadeInUp faster">
+                                      <a href="category.php?cat=Men&subcat=Shoes">Men</a>
+                                      <a href="category.php?cat=Women&subcat=Shoes">Women</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="category.php?cat=Phones">Phones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="category.php?cat=Electronics">Electronics</a>
+                                <li class="nav-item dropdown2">
+                                    <a class="nav-link" href="category.php?cat=Electronics">Electronics <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
+                                    <div class="dropdown-content2 animated fadeInUp faster">
+                                      <a href="category.php?cat=Electronics&subcat=Phones">Phones</a>
+                                      <a href="category.php?cat=Electronics&subcat=Laptops">Laptops</a>
+                                      <a href="category.php?cat=Electronics&subcat=Monitors">Monitors</a>
+
+                                    </div>
                                 </li>
                            </ul>
                         </div>

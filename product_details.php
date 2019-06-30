@@ -146,6 +146,7 @@
                 
                         </div>
                         <form name="add-cart-form" action="" method="POST">
+                        <div> Quantity: <input type="text" name="order-qty" value="1"></div>
                         <div class="d-inline-block my-3">
                             <button type="submit" name="add-cart-btn" class="btn custom-btn" title="Add item to Cart" <?php if($row["product_qty"] < 1) { echo 'disabled'; } ?> ><i class="fa fa-cart-plus text-white"></i> ADD TO CART</button>
                         </div>
@@ -320,7 +321,7 @@
            $p_name = $row3["product_name"];
            $p_price = $row3["product_price"];
            $p_qty = $row3["product_qty"];
-           $qty = 1;
+           $qty = $_POST['order-qty'];
            $total = $p_price * $qty;
         }
     

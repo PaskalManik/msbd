@@ -76,10 +76,12 @@
                     <h4 class="text-orange"> Shipment details </h4> 
                     <h4 class="my-3"> <?php echo $row["product_name"]; ?></h4>
                     <p> Price: ₹<?php echo $row["product_price"]; ?> </p>
-                    <p>Status: <?php echo $row["order_status"]; ?></p>
                     <p> Date: <?php echo $row["order_date"]; ?> </p>
                     <p> Qty: <?php echo $row["product_qty"]; ?> </p>
                     <p> Total: ₹<?php echo $row["product_price"]*$row["product_qty"]; ?> </p>
+                    <p class="text-orange">Status: <?php echo $row["order_status"]; ?> 
+                      <a href="javascript:void(0);" class="btn custom-btn ml-4" data-toggle="modal" data-target="#statusChangeModal">Change</a>
+                    </p>
                   </div>
                 </div>
             </div>
@@ -114,6 +116,66 @@
         </div>
         </div>
     </div>
+
+                <!-- Update Status Modal -->
+            
+              <div class="modal fade" id="statusChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Change Order Status?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     <p class="text-danger"> Warning: This Status will be visible to the user. Make sure the status is correct.</p>
+                      <div class="row py-3">
+                    <div class="col-6 pl-5 m-0">
+                      <span class="text-orange">Select the Status:</span>
+                    </div>
+                    <div class="col-6 pl-0 m-0"> 
+                      <form action="" method="POST" name="order-status">
+                      <select class="form-control" name="status" required>
+                      <option value="In-Process">In-Process</option>
+                      <option value="Approved">Approved</option>
+                      <option value="Cancelled">Cancelled</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Returned">Returned</option>
+                    </select>
+                    </div>
+                  </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" name="submit-btn" class="btn custom-btn">Save changes</button>
+                    </form>
+                    <?php
+
+                      if (isset($_POST["submit-btn"])) {
+
+                        if (!mysqli_query($conn, " UPDATE orders SET order_status='$_POST[status]' WHERE order_id=$oid ")) {
+
+                        echo("Error description: " . mysqli_error($conn));
+                        
+                        } else{
+
+                          ?>
+                          <script type="text/javascript">
+                            alert('Product added successfuly!');
+                            window.location.href =  window.location.href;
+                          </script>
+                          <?php
+                        }
+                                
+                      }
+
+                    ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
                     <?php

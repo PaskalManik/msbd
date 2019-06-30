@@ -86,25 +86,6 @@
         
       <?php 
         
-        if (isset($_POST["add_product"])) {
-          
-          $v1 = rand(1111,9999);
-          $v2 = rand(1111,9999);
-          $v3 = $v1.$v2;
-
-          $v3 = md5($v3);
-
-          $fnm = $_FILES["pimage"]["name"];
-          $destn = "./product_img/".$v3.$fnm;
-          $destn1 = "product_img/".$v3.$fnm;
-          move_uploaded_file($_FILES["pimage"]["tmp_name"],$destn);
-
-
-          mysqli_query($conn, " INSERT INTO products(product_name, product_price, product_qty, product_img, product_category, product_description) values('$_POST[pname]', $_POST[pprice], $_POST[pqty], '$destn1', '$_POST[pcategory]', '$_POST[pdesc]')"); 
-
-
-
-        }
 
        ?> 
         

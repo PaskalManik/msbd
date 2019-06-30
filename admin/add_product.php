@@ -58,12 +58,30 @@
                   <div class="col-md-6 form-group py-2">
                     <label>Product Category:</label>
                     <select class="form-control" name="pcategory" required>
-                      <option value="Men">Men Clothing</option>
-                      <option value="Women">Women Clothing</option>
+                      <option value="Men">Men</option>
+                      <option value="Women">Women</option>
+                      <option value="Boys">Boys</option>
+                      <option value="Girls">Girls</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Electronics">Electronics</option>
-                      <option value="Phones">Phones</option>
                       <option value="Shoes">Shoes</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group py-2">
+                    <label>Product Sub-category:</label>
+                    <select class="form-control" name="psubcategory" required>
+                      <option value="Tshirts">T-shirts</option>
+                      <option value="Shoes">Shoes</option>
+                      <option value="Jeans">Jeans</option>
+                      <option value="Sarees">Sarees</option>
+                      <option value="Kurtas">Kurtas</option>
+                      <option value="Tops">Tops</option>
+                      <option value="Sandals">Sandals</option>
+                      <option value="SmartTVs">Smart TVs</option>
+                      <option value="Watches">Watches</option>
+                      <option value="Laptops">Laptops</option>
+                      <option value="Monitors">Monitors</option>
+                     
                     </select>
                   </div>
                   <div class="col-md-6 form-group py-2">
@@ -164,7 +182,7 @@
           $img_arr = serialize($img_arr);
         
 
-          if (!mysqli_query($conn, " INSERT INTO products(product_name, product_slider, product_price, product_old_price, product_qty, product_img, product_preview, product_tag, product_brand, product_category, product_description) VALUES('$_POST[pname]', '$_POST[pslider]', $_POST[pprice], $_POST[poldprice], $_POST[pqty], '$destn1', '$img_arr', '$_POST[ptag]', '$_POST[pbrand]', '$_POST[pcategory]', '$_POST[pdesc]')") ) 
+          if (!mysqli_query($conn, " INSERT INTO products(product_name, product_slider, product_price, product_old_price, product_qty, product_img, product_preview, product_tag, product_brand, product_category, product_description,product_subcategory) VALUES('$_POST[pname]', '$_POST[pslider]', $_POST[pprice], $_POST[poldprice], $_POST[pqty], '$destn1', '$img_arr', '$_POST[ptag]', '$_POST[pbrand]', '$_POST[pcategory]', '$_POST[pdesc]','$_POST[psubcategory]')") ) 
 
           {
             echo("Error description: " . mysqli_error($conn));

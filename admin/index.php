@@ -8,6 +8,7 @@
       }
       
       include './inc/header.php';
+      include './inc/db_connect.php';
     ?>
       
   
@@ -47,7 +48,7 @@
                 </div>
                 <div class="mr-5">26 Registered Users</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="users.php">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fa fa-angle-right"></i>
@@ -61,9 +62,9 @@
                 <div class="card-body-icon">
                   <i class="fa fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 New Orders!</div>
+                <div class="mr-5">1113 Products</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="all_products.php">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fa fa-angle-right"></i>
@@ -77,9 +78,9 @@
                 <div class="card-body-icon">
                   <i class="fa fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 All Orders!</div>
+                <div class="mr-5">123 Orders!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="orders.php">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fa fa-angle-right"></i>
@@ -93,9 +94,9 @@
                 <div class="card-body-icon">
                   <i class="fa fa-fw fa-ticket"></i>
                 </div>
-                <div class="mr-5">13 New Tickets!</div>
+                <div class="mr-5">13 Tickets!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="tickets.php">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fa fa-angle-right"></i>
@@ -108,19 +109,50 @@
         <!-- Area Chart Example-->
         <div class="card mb-3">
           <div class="card-header">
-            <i class="fa fa-chart-area"></i>
-            Area Chart Example</div>
+            <i class="fa fa-shopping-cart text-dark"></i>
+           Recent Orders</div>
           <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Ordered by</th>
+                    <th>Total</th>
+                    <th>View</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                 <?php 
+
+                 $res = mysqli_query($conn, " SELECT * FROM orders JOIN users ON orders.user_id = users.user_id  ORDER BY order_id DESC LIMIT 5 ");
+                            
+                    while($row = mysqli_fetch_array($res)) {
+
+                      ?>
+                  <tr>
+                    <td><?php echo $row['product_name'] ?></td>
+                    <td> <?php echo $row['product_qty'] ?> </td>
+                    <td><?php echo $row['firstname'].' '.$row['lastname'] ?></td>
+                    <td>₹ <?php echo $row['order_total'] ?> </td>
+                    <td><a href="order-details.php?id=<?php echo $row['order_id'] ?>" style="text-decoration: none;"> <i class="fa text-dark fa-eye"></i> View</a> </td>
+                  </tr>
+                  <?php
+                    }
+                  ?>
+                </tbody>
+              </table>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated Today at  <?php echo date("h:i:sa"); ?> </div>
         </div>
 
         <!-- DataTables Example -->
         <div class="card mb-3">
           <div class="card-header">
             <i class="fa fa-table"></i>
-            Data Table Example</div>
+            Recently Registered Users</div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

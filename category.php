@@ -2,8 +2,16 @@
     include './inc/header.php';
     include './inc/db_connect.php';
 
-    $cat = $_GET["cat"];
-
+    if (isset($_GET['cat'])) {
+         
+         $cat = $_GET["cat"];
+    }
+       
+    if (isset($_GET['subcat'])) {
+        
+        $subcat = $_GET["subcat"];
+    }
+   
     ?>
 
     <!-- Beardcumb --> 
@@ -12,7 +20,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb container">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo $cat ?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php if(!isset($_GET['subcat'])){ echo $cat;} else{ echo $subcat; } ?> </li>
             </ol>
         </nav>
     </div>
@@ -21,15 +29,25 @@
 
     <div class="container">
         <div class="my-5 py-3">
-            <h3 class="text-left text-orange"> <span class="text-dark">Category: <?php echo $cat ?> </span> </h3>
+            <h3 class="text-left text-orange"> <span class="text-dark">Category: <?php if(!isset($_GET['subcat'])){ echo $cat;} else{ echo $subcat; } ?> </span> </h3>
             <hr class="py-3">
          
         <!-- Product List start -->
                 <div class="row">
                     
                 <?php  
+                
+                if (!isset($_GET['subcat'])) {
+                    $res = mysqli_query($conn, "SELECT * FROM products WHERE product_category='$cat' ");
+                } 
+                else{
 
-                $res = mysqli_query($conn, "SELECT * FROM products WHERE product_category='$cat' ");
+                $res = mysqli_query($conn, "SELECT * FROM products WHERE product_category='$cat' AND product_subcategory='$subcat' ");
+                }
+                
+
+                // $res = mysqli_query($conn, "SELECT * FROM products WHERE product_category='$cat' AND product_subcategory='$subcat' ");
+
                 while ($row=mysqli_fetch_array($res)) {
                 
                 ?>
