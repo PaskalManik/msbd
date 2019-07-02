@@ -72,7 +72,7 @@
                 </div>
                 </div>
                 <div class="text-center my-5">
-                    <h6>Need help with your order? <a href="javascript:void(0);" class="text-orange btn custom-btn"  data-toggle="modal" data-target="#exampleModal">Contact us</a></h6>
+                    <h6>Need help with your order? <a href="javascript:void(0);" class="text-orange btn custom-btn"  data-toggle="modal" data-target="#exampleModal">Need Help</a></h6>
                    <!-- Button trigger modal -->
                 </div>
             </div>
@@ -92,7 +92,7 @@
   <div class="modal-dialog centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Submit Issue</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Need Help: Submit your issue</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -103,11 +103,12 @@
                 <label>Subject</label>
                 <select class="form-control" name="subject" required>
                 <option>Select your issue</option>
+                <option value="Cancel Order">Cancel Order</option>
                 <option value="Size Issue">Size Issue</option>
                 <option value="Item not Received">Item not Received</option>
                 <option value="Defect Item Received">Defect Item Received</option>
                 <option value="Color Issue">Color Issue</option>
-                <option value="Others">Others</option>
+                <option value="Others">Others(Describe it below)</option>
                 </select>
             </div>
             <div class="form-group">
@@ -134,8 +135,9 @@
 if(isset($_POST["submit-btn"])) {
 
             $msg = htmlentities($_POST['message']);
+            $date = date("d-m-y");
 
-         if(! mysqli_query($conn, " INSERT INTO tickets (order_id,user_id,subject,message,status) VALUES($oid, $uid, '$_POST[subject]','$msg', 'In Process') ") ) {
+         if(! mysqli_query($conn, " INSERT INTO tickets (order_id,user_id,subject,message,status,ticket_date) VALUES($oid, $uid, '$_POST[subject]','$msg', 'In Process', '$date') ") ) {
 
             echo("Error description: " . mysqli_error($conn));
             ?>

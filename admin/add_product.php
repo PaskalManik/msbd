@@ -80,7 +80,7 @@
                       <option value="SmartTVs">Smart TVs</option>
                       <option value="Watches">Watches</option>
                       <option value="Laptops">Laptops</option>
-                      <option value="Monitors">Monitors</option>
+                      <option value="Cameras">Cameras</option>
                      
                     </select>
                   </div>

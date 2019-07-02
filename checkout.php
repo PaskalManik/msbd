@@ -1,7 +1,6 @@
 <?php
 ob_start();
 
-
 include './inc/header.php';
 include './inc/db_connect.php';
 
@@ -67,15 +66,15 @@ if (!isset($_SESSION['loggedin'])) {
 			<form method="POST" action="" class="my-4">
 				<div class="form-group">
 			    <label>First Name</label>
-			    <input type="text" class="form-control" placeholder="First Name" name="fname" required>
+			    <input type="text" class="form-control" placeholder="First Name" name="fname" value="<?php echo $_SESSION['firstname']?>" required>
 			  </div>
 			  <div class="form-group">
 			   <label>Last Name</label>
-			    <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
+			    <input type="text" class="form-control" placeholder="Last Name" name="lname" value="<?php echo $_SESSION['lastname']?>" required>
 			  </div>
 			  <div class="form-group">
 			    <label>Email</label>
-			    <input type="email" class="form-control" autocomplete="off" placeholder="Enter email" name="email" required>
+			    <input type="email" class="form-control" autocomplete="off" placeholder="Enter email" name="email" value="<?php echo $_SESSION['user_email']?>" required>
 			  </div>
 			  <div class="form-group">
 			   <label>Address</label>
@@ -91,7 +90,7 @@ if (!isset($_SESSION['loggedin'])) {
 			  </div> 
 			  <div class="form-group">
 			   <label>Contact No.</label>
-			    <input type="text" class="form-control" placeholder="Contact No." name="contact_no" required>
+			    <input type="text" class="form-control" placeholder="Contact No." name="contact_no" value="<?php echo $_SESSION['contact_no']?>" required>
 			  </div>
 			  
 		</div>

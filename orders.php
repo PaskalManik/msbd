@@ -24,7 +24,7 @@
 
             <?php 
 
-                $res = mysqli_query($conn, "SELECT * FROM orders WHERE user_id=$uid ");
+                $res = mysqli_query($conn, "SELECT * FROM orders WHERE user_id=$uid ORDER BY order_id DESC");
                             
                     while($row = mysqli_fetch_array($res)) {
 
@@ -36,7 +36,7 @@
                                     <span class="d-inline-block align-middle"><img class="img-fluid p-2 d-inline-block product-img" src="./admin/<?php echo $row["product_img"]; ?>"></span>
                                 </div>
                                 <div class="col-9">
-                                    <a href="">
+                                    <a href="order_details.php?id=<?php echo $row["order_id"]; ?>">
                                         <h4 class="my-3"><?php echo $row["product_name"]; ?></h4>
                                     </a>
                                     <p> Date: <?php echo $row["order_date"]; ?> </p>

@@ -115,7 +115,7 @@
 								$_SESSION['user_email'] = $row['email'];
 								$_SESSION['firstname'] = $row['firstname'];
 								$_SESSION['lastname'] = $row['lastname'];
-
+								$_SESSION['contact_no'] = $row['contact_no'];
 
 								if ($ref === 'checkout') {
 									?>

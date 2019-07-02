@@ -146,7 +146,7 @@
                 
                         </div>
                         <form name="add-cart-form" action="" method="POST">
-                        <div> Quantity: <input type="text" name="order-qty" value="1"></div>
+                        <div> Quantity: <input type="text" name="order-qty" value="1" style="width: 60px"></div>
                         <div class="d-inline-block my-3">
                             <button type="submit" name="add-cart-btn" class="btn custom-btn" title="Add item to Cart" <?php if($row["product_qty"] < 1) { echo 'disabled'; } ?> ><i class="fa fa-cart-plus text-white"></i> ADD TO CART</button>
                         </div>

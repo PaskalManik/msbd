@@ -52,7 +52,7 @@
 
                 <?php 
 
-                 $res = mysqli_query($conn, "SELECT * FROM orders JOIN users ON orders.user_id = users.user_id");
+                 $res = mysqli_query($conn, "SELECT * FROM orders JOIN users ON orders.user_id = users.user_id ORDER BY order_id DESC");
                             
                     while($row = mysqli_fetch_array($res)) {
 
@@ -71,6 +71,7 @@
                                       <p>Qty: <?php echo $row['product_qty'] ?></p>
                                       <p>Total: ₹<?php echo $row['order_total'] ?></p>
                                       <p>Ordered by: <?php echo $row['firstname'].' '.$row['lastname'] ?> </p>
+                                      <p>Status: <span class="text-orange"><?php echo $row['order_status'] ?> </span></p>
                               </div>
                               <div class="col-md-2">
                                     <a href="order-details.php?id=<?php echo $row['order_id'] ?>" class="btn custom-btn my-4"> <i class="fa fa-eye"></i> View</a>

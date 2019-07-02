@@ -47,7 +47,7 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Ticket ID</th>
-            <th scope="col">Order ID</th>
+            <th scope="col">Order</th>
             <th scope="col">User ID</th>
             <th scope="col">Subject</th>
             <th scope="col">Message</th>
@@ -67,7 +67,11 @@
                  <tr>
                
                             <td> <?php echo $result['ticket_id']; ?> </td>
-                            <td> <?php echo $result['order_id']; ?> </td>
+                            <td> 
+                              <a style="text-decoration: none;" href="order-details.php?id=<?php echo $result['order_id']; ?> ">
+                                <i class="fa text-dark fa-eye"></i> View
+                              </a>
+                            </td>
                             <td> <?php echo $result['user_id']; ?> </td>
                             <td> <?php echo $result['subject']; ?> </td>
                             <td> <?php echo $result['message']; ?> </td>

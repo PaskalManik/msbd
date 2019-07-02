@@ -61,7 +61,7 @@
         <section>
             <nav class="navbar navbar-dark bg-orange py-2">
                 <div class="container">
-                <a class="logo my-1" href="index.php"><h2 class="text-center"> <img src="img/icon.png"> <span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
+                <a class="logo my-1" style="text-decoration: none;" href="index.php"><h2 class="text-center"> <img src="img/icon.png"> <span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
                 <div class=" my-1">
                     <ul class="navbar-nav" style="flex-direction: row;">
                         
@@ -162,7 +162,7 @@
                                     <div class="dropdown-content2 animated fadeInUp faster">
                                       <a href="category.php?cat=Electronics&subcat=Phones">Phones</a>
                                       <a href="category.php?cat=Electronics&subcat=Laptops">Laptops</a>
-                                      <a href="category.php?cat=Electronics&subcat=Monitors">Monitors</a>
+                                      <a href="category.php?cat=Electronics&subcat=Cameras">Cameras</a>
 
                                     </div>
                                 </li>

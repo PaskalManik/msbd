@@ -97,7 +97,7 @@
                       <option value="Watches">Watches</option>
                       <option value="Phones">Phones</option>
                       <option value="Laptops">Laptops</option>
-                      <option value="Monitors">Monitors</option>
+                      <option value="Cameras">Cameras</option>
                     </select>
                     <span class="pl-2 text-orange"> <small>Current: <?php echo $row['product_subcategory']; ?> </small></span>
                   </div>

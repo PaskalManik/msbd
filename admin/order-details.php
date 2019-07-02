@@ -163,7 +163,7 @@
 
                           ?>
                           <script type="text/javascript">
-                            alert('Product added successfuly!');
+                            alert('Order status updated successfuly!');
                             window.location.href =  window.location.href;
                           </script>
                           <?php

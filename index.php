@@ -32,7 +32,7 @@
                         <div class="text-white text-center">
                             <h1 class="display-4">New Products</h1>
                             <h1 class="display-4">Collection</h1>
-                            <a href="#" class="btn custom-btn btn-lg ml-2 mt-2">Shop Now</a>
+                            <a data-scroll href="#latest_deals" class="btn custom-btn btn-lg ml-2 mt-2">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <div class="text-center">
                             <h1 class="display-4 text-orange">Bag Sale</h1>
                             <h3 class="text-white">Upto 50% Discount</h3>
-                            <a href="#" class="btn custom-btn bg-dark btn-lg ml-2 mt-2">Shop Now</a>
+                            <a data-scroll href="#todays_deal" class="btn custom-btn bg-dark btn-lg ml-2 mt-2">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         <div class="text-center">
                             <h1 class="display-4 text-dark">Hot Deals</h1>
                             <h3 class="text-dark">upto 50% Off</h3>
-                            <a href="#" class="btn custom-btn btn-lg ml-2 mt-2">Shop Now</a>
+                            <a data-scroll href="#todays_deal" class="btn custom-btn btn-lg ml-2 mt-2">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -147,20 +147,20 @@
 <!-- End New Collections section-->
 
 <!-- Today's Deals section -->
-    <section>
+    <section id="todays_deal">
         <div class="container py-4">
         <div class="row">
         <div class="col-md-3">
              <h6 class="text-custom-1 custom-badge-light py-2 text-center">CATEGORIES</h6>
             <div class="custom-card">
             <ul class="custom-list-group pl-0">
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Phones">PHONES</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Accessories">ACCESSORIES</a> </li>
+                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics&subcat=Phones">PHONES</a> </li>
+                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics&subcat=Laptops">LAPTOPS</a> </li>
                 <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Men">MEN'S CLOTHING</a> </li>
                 <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Women">WOMEN'S CLOTHING</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Shoes">SHOES</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Watch">JEWELRY & WATCHES</a> </li>
                 <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics">ELECTRONICS</a> </li>
+                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Boys&subcat=Tshirts">BOY'S CLOTHING</a> </li>
+                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Girls&subcat=Tops">BOY'S CLOTHING</a> </li>
               </ul>
               </div>
         </div>
@@ -227,7 +227,7 @@
 
 
     <!-- Latest Products-->
-        <section>
+        <section id="latest_deals">
             <div class="container">
                 <div class="text-left">
                         <div class="" style="border-bottom: 1px solid #000;">

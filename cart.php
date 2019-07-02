@@ -64,7 +64,7 @@
                     <div class="py-5 my-5 text-center">
                         <img src="img/opps-icon.png" alt="placeholder+image">
                         <h4 class="text-center text-dark  my-2">Opps! No items in cart </h4>
-                        <a href="index.php" class="btn custom-btn mt-5">Let's add some items</a>
+                        <a href="index.php" class="btn custom-btn mt-5">LET'S ADD <i class="fa text-white fa-angle-right"></i> </a>
                     </div>
                     <?php
                 }
