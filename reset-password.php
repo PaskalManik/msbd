@@ -3,11 +3,9 @@
 	session_start();
 
 	include './inc/db_connect.php';
-
-echo $_SESSION['otp'];
-
 	
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
