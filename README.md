@@ -27,3 +27,11 @@ The Project is basically divided into two views - admin and user.
 4. Open the config.php file in project root directory. And update the $db_name, $db_username, $db_password variables accordingly.
 5. That's all everything's ready now. Start your local server and open the url 'localhost/php-ecommerce' or type your domain in case you are on a server.
 
+# Logins
+Admin :
+username: admin
+password: admin
+
+User:
+email: mintukurmi1@gmail.com
+pass: 1234
