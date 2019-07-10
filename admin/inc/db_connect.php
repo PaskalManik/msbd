@@ -1,6 +1,12 @@
 
-<!-- Database Connection -->
+
     <?php 
-       $conn = mysqli_connect("localhost", "root", "");
-       mysqli_select_db($conn, "eshop");
+		
+		include '../config.php';
+		
+		// Database Connection
+		
+       $conn = mysqli_connect("localhost", $db_username, $db_password);
+       mysqli_select_db($conn, $db_name);
+	   
     ?>
