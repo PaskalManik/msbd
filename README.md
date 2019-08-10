@@ -32,4 +32,4 @@ Admin :
 username: admin  ;   password: admin
 
 User:
-email: mintukurmi1@gmail.com   ;   pass: 1234
+email: johndoe@gmail.com   ;   pass: 1234
