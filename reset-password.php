@@ -44,7 +44,7 @@
 					<h3 class="text-center py-1"><span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h3>
 					</div>
 					<p class="text-center pt-4 text-custom-1">Reset Password</p>
-					<form action="" method="POST">
+					<form action="" method="POST" oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
 						<div class="py-3">
 						      <div class="input-group">
 						        <div class="input-group-prepend">
@@ -52,7 +52,7 @@
 						        </div>
 						        <input type="email" class="form-control" id="password" placeholder="Email" name="email" 
 
-						        <?php if (isset($_SESSION['otp_email'])){ echo 'disabled'; } ?> 
+						        <?php if (isset($_SESSION['otp_email'])){ echo 'readonly'; } ?> 
 						        	required value="<?php if (isset($_SESSION['otp_email'])){
 						        	echo $_SESSION['otp_email']; } ?> ">
         					</div>
@@ -117,15 +117,23 @@
 
 						$temp_otp = $_POST['otp'];
 						$temp_email = $_POST['email'];
+						
+						// new password to update on db
+						$pwd = hash('sha1', $_POST['pass2']);
 
-						if ($temp_otp == $_SESSION['otp'] &&  $temp_email == $_SESSION['otp_email']) {
+						if ($temp_otp == $_SESSION['otp'] && $temp_email == $_SESSION['otp_email'] ) {
 
-							echo 'password changed';
+
+							mysqli_query($conn, "UPDATE users SET password = '$pwd' WHERE email = '$_SESSION[otp_email]' ");
 							
-							?>
-					    <script type="text/javascript"> alert('Your password was reset was successful. Login to continue.'); </script>
+							session_destroy();
 
+							?>
+					    	<script type="text/javascript"> alert('Your password was reset was successful. Login to continue.'); </script>
+							<script type="text/javascript"> window.location.href = "login.php"; </script>
 							<?php
+							
+					
 						}
 
 						else {
@@ -153,16 +161,17 @@
 							
 						
 
-						$_SESSION['otp_email'] = $_POST['email'];
+						$_SESSION['otp_email'] = $uemail;
 						
 						$new_otp = mt_rand(100000, 999999);
 
 						
 						$_SESSION['otp'] = $new_otp;
 
+						
 
-						// sending otp 
-						// 
+
+						// sending otp to email
 						
 						$to = $_SESSION['otp_email'];
 						$subject = "Password Reset - ECART";
@@ -208,13 +217,13 @@
 
 					<script type="text/javascript">
 						alert('Email not registered.');
-					</script>
+					</script> 
 
 						<?php
 					}
 
 						
-					}
+					} 
 
 				}
 
