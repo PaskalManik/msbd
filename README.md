@@ -1,6 +1,9 @@
 # php-ecommerce
 This is a E-commerce Management System build on top of PHP, HTML, JS, CSS, bootstrap and jquery.
 
+# Live Demo:
+visit - https://ecart.cf/
+
 The Project is basically divided into two views - admin and user.
 
 # Admin can perform the following actions:
@@ -21,4 +24,12 @@ The Project is basically divided into two views - admin and user.
 1. First clone the Repository.
 2. Move the project folder (i.e php-ecommerce folder) to server root directory. In most cases it would be www, public_html or htdocs.
 3. Create a database. And import the 'ecart_db.sql' file present in './database/' folder in the project directory.
-4. 
+4. Open the config.php file in project root directory. And update the $db_name, $db_username, $db_password variables accordingly.
+5. That's all everything's ready now. Start your local server and open the url 'localhost/php-ecommerce' or type your domain in case you are on a server.
+
+# Logins
+Admin :
+username: admin  ;   password: admin
+
+User:
+email: mintukurmi1@gmail.com   ;   pass: 1234
