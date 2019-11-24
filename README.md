@@ -1,5 +1,5 @@
 # php-ecommerce
-This is a E-commerce Management System build on top of PHP, HTML, JS, CSS, bootstrap and jquery.
+This is a E-commerce Management System built on top of PHP, HTML, CSS, JS , Bootstrap and Jquery.
 
 # Live Demo:
 visit - https://ecart.cf/
