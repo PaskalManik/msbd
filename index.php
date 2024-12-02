@@ -2,18 +2,9 @@
    
     include './inc/header.php';
     include './inc/db_connect.php';
-
     
     $_SESSION["ref"] = "index";
 
-
-    // if( empty($_SESSION["user_id"]) || $_SESSION["user_id"] == ""){
-    //     // do nothing 
-    // } else {
-    //     $_SESSION["user_id"] = "";
-    // }
-
-    // $_SESSION["user_id"] = "";
 
 ?>
     <!-- Start Carousel  -->
@@ -146,31 +137,6 @@
 
 <!-- End New Collections section-->
 
-<!-- Today's Deals section -->
-    <section id="todays_deal">
-        <div class="container py-4">
-        <div class="row">
-        <div class="col-md-3">
-             <h6 class="text-custom-1 custom-badge-light py-2 text-center">CATEGORIES</h6>
-            <div class="custom-card">
-            <ul class="custom-list-group pl-0">
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics&subcat=Phones">PHONES</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics&subcat=Laptops">LAPTOPS</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Men">MEN'S CLOTHING</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Women">WOMEN'S CLOTHING</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Electronics">ELECTRONICS</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Boys&subcat=Tshirts">BOY'S CLOTHING</a> </li>
-                <li class=""><i class="fa fa-angle-right"></i> <a href="category.php?cat=Girls&subcat=Tops">BOY'S CLOTHING</a> </li>
-              </ul>
-              </div>
-        </div>
-
-        <div class="col-md-9 pl-4 pr-4">
-        <div class="text-left">
-            <div class="" style="border-bottom: 1px solid #000;">
-                <h3 class="badge badge-primary custom-badge-light" style="margin-bottom: 0px;">TODAY'S DEALS</h3>
-            </div>
-
     <!-- Todays Deals Slider -->
 
             <section class="deals-slider slider">
@@ -189,7 +155,7 @@
                     <div class="p-2">
                         <div class="row">
                             <div class="col-7">
-                                <h5 class="py-2">₹<?php echo $row["product_price"] ?></h5>
+                                <h5 class="py-2">Rp<?php echo $row["product_price"] ?></h5>
                             </div>
                             <div class="col-5">
                                 <div class="rating py-2 m-0">
@@ -248,7 +214,7 @@
                     <div class="p-2">
                         <div class="row">
                             <div class="col-7">
-                                <h5 class="py-2">₹<?php echo $row["product_price"] ?></h5>
+                                <h5 class="py-2">Rp<?php echo $row["product_price"] ?></h5>
                             </div>
                             <div class="col-5">
                                 <div class="rating py-2 m-0">
@@ -281,69 +247,6 @@
             </div>
         </section>
     <!-- End Latest Products -->
-    
-    <!-- New arrivals -->
-
-    <section class="py-5" style="background-color:#F6F7F8">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="position-relative my-3">
-                        <img src="img/banner13.jpg" class="img-fluid">
-                        <div class="dark-overlay"></div>
-                        <div class="carousel-text text-center">
-                            <h1 class="text-orange display-4"> HOT DEALS</h1>
-                            <p class="pt-2">Upto 50% Off</p>
-                            <button class="btn custom-btn">SHOP NOW</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                        <div class="position-relative my-3">
-                            <img src="img/banner10.jpg" class="img-fluid">
-                            <div class="dark-overlay"></div>
-                            <div class="carousel-text text-center">
-                                <h1> New<br>Arrivals</h1>
-                                <p class="pt-3">30% Off</p>
-                            </div>
-                            <div class="light-overlay">
-                                <div class="carousel-text">
-                                    <div class="text-white">
-                                        <a href="javaScript:Void(0);" class="btn custom-btn btn-lg ml-2 mt-2">
-                                            <div><div class="display-4"><i class="fa fa-plus-circle text-white" aria-hidden="true"></i></div>
-                                            <h2>Explore</h2>
-                                        </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                    </div>
-                    <div class="position-relative mt-4">
-                        <img src="img/banner12.jpg" class="img-fluid">
-                            <div class="dark-overlay"></div>
-                            <div class="carousel-text text-center">
-                                <h1> New<br>Arrivals</h1>
-                                <p class="pt-3">30% Off</p>
-                            </div>
-                            <div class="light-overlay">
-                                <div class="carousel-text">
-                                    <div class="text-white">
-                                        <a href="javaScript:Void(0);" class="btn custom-btn btn-lg ml-2 mt-2">
-                                            <div><div class="display-4"><i class="fa fa-plus-circle text-white" aria-hidden="true"></i></div>
-                                            <h2>Explore</h2>
-                                        </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- End New Arrivals -->
 
     
     <!-- Picked for you  -->
@@ -378,7 +281,7 @@
                     <div class="p-2">
                         <div class="row">
                             <div class="col-7">
-                                <h5 class="py-2">₹<?php echo $row["product_price"] ?></h5>
+                                <h5 class="py-2">Rp<?php echo $row["product_price"] ?></h5>
                             </div>
                             <div class="col-5">
                                 <div class="rating py-2 m-0">

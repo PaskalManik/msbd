@@ -2,6 +2,7 @@
     include './inc/header.php';
     include './inc/db_connect.php';
 
+    
     if (isset($_GET['cat'])) {
          
          $cat = $_GET["cat"];
@@ -60,7 +61,7 @@
                                 <div class="p-2">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h5 class="py-2">₹<?php echo $row["product_price"] ?></h5>
+                                            <h5 class="py-2">Rp<?php echo $row["product_price"] ?></h5>
                                         </div>
                                         <div class="col-5">
                                             <div class="rating py-2 m-0">

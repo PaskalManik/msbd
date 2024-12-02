@@ -1,20 +1,11 @@
 <?php 
 	ob_start();
-
 	include './inc/header.php';
-
 	$ref = $_GET['ref'];
-
 	if ($ref != 'checkout') {
-
 		header('Location: cart.php');
-		
 	}
-
-
  ?>
-
-
  <div class="container">
 		
 	<div class="my-5 text-center">
@@ -25,14 +16,8 @@
 		</div>
 		<a class="btn custom-btn btn-lg my-4" href="index.php">Shop more <i class="fa fa-angle-right text-white"></i> </a>
 	</div>
-
  </div>
-
-
-
  <?php 
  include './inc/footer.php';
-
  	ob_end_flush();
-
   ?>

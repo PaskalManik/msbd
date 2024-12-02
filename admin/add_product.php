@@ -3,9 +3,12 @@
       
       session_start();
 
-      if($_SESSION["admin"]==""){
-        header('Location: admin-login.php');
-      }
+      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+        // Jika tidak login atau bukan admin, arahkan ke login
+        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+        header('Location: ../login.php'); // Arahkan ke halaman login utama
+        exit();
+    }
 
       include './inc/header.php';
       include './inc/sidebar.php';
@@ -60,11 +63,6 @@
                     <select class="form-control" name="pcategory" required>
                       <option value="Men">Men</option>
                       <option value="Women">Women</option>
-                      <option value="Boys">Boys</option>
-                      <option value="Girls">Girls</option>
-                      <option value="Accessories">Accessories</option>
-                      <option value="Electronics">Electronics</option>
-                      <option value="Shoes">Shoes</option>
                     </select>
                   </div>
                   <div class="col-md-6 form-group py-2">
@@ -73,15 +71,7 @@
                       <option value="Tshirts">T-shirts</option>
                       <option value="Shoes">Shoes</option>
                       <option value="Jeans">Jeans</option>
-                      <option value="Sarees">Sarees</option>
-                      <option value="Kurtas">Kurtas</option>
-                      <option value="Tops">Tops</option>
-                      <option value="Sandals">Sandals</option>
-                      <option value="SmartTVs">Smart TVs</option>
-                      <option value="Watches">Watches</option>
-                      <option value="Laptops">Laptops</option>
-                      <option value="Cameras">Cameras</option>
-                     
+                      <option value="Sarees">Other</option>
                     </select>
                   </div>
                   <div class="col-md-6 form-group py-2">
@@ -90,10 +80,10 @@
                   </div>
                   <div class="col-md-6 form-group py-2">
                     <label>Product Preview Images (Max 4):</label>
-                    <input type="file" class="form-control-file" name="pimg1" required>
-                    <input type="file" class="form-control-file" name="pimg2" required>
-                    <input type="file" class="form-control-file" name="pimg3" required>
-                    <input type="file" class="form-control-file" name="pimg4" required>
+                    <input type="file" class="form-control-file" name="pimg1" >
+                    <input type="file" class="form-control-file" name="pimg2" >
+                    <input type="file" class="form-control-file" name="pimg3" >
+                    <input type="file" class="form-control-file" name="pimg4" >
                   </div>
                   <div class="col-md-6 form-group py-2">
                     <label>Product Price:</label>

@@ -1,9 +1,10 @@
     <?php 
-
     session_start();
 
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    }
     // checking no of items in cart
-
     $total_item = 0;
 
 
@@ -68,7 +69,6 @@
                         <li class="nav-item ml-2 dropdown"> <span class="main-icon"><i class="fa fa-user" aria-hidden="true"></i></span> 
                         <a href="<?php if (isset($_SESSION['loggedin'])) { echo 'javascript:void(0);'; } else { echo 'login.php'; } ?>" id="dropdown"> 
                             <?php if (isset($_SESSION['loggedin'])) {
-                            
                                 echo 'Hi, '.$_SESSION['firstname'];
                                 ?>
                                 <i class="fa fa-angle-down"></i> </a> 
@@ -76,16 +76,11 @@
                                   <a href="orders.php">My Orders</a>
                                   <a href="logout.php">Logout</a>
                                 </div>
-
                                 <?php
-
                             } else {
                                 echo 'LOGIN';
                             }
-
                             ?> 
-
-                        
                         </li>
 
                         <li class="nav-item ml-4"> <span class="main-icon" style="padding: 5px 9px 5px 7px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <a href="cart.php"> Cart 
@@ -121,48 +116,10 @@
                                 <li class="nav-item active">
                                 <a class="nav-link" href="index.php"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Home</span> <span class="sr-only">(current)</span></a>
                                 </li>
-                                
-                                
-                                <li class="nav-item dropdown2">
-                                    <a class="nav-link " href="category.php?cat=Men">Men <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
-                                    <div class="dropdown-content2 animated fadeInUp faster">
-                                      <a href="category.php?cat=Men&subcat=Tshirts">T-shirts</a>
-                                      <a href="category.php?cat=Men&subcat=Jeans">Jeans</a>
-                                      <a href="category.php?cat=Men&subcat=Shoes">Shoes</a>
-                                    </div>
+                                <li class="nav-item active">
+                                <a class="nav-link" href="request-product.php"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Request Product</span> <span class="sr-only">(current)</span></a>
                                 </li>
 
-                                <li class="nav-item dropdown2">
-                                    <a class="nav-link" href="category.php?cat=Women">Women <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
-                                    <div class="dropdown-content2 animated fadeInUp faster">
-                                      <a href="category.php?cat=Women&subcat=Sarees">Saree</a>
-                                      <a href="category.php?cat=Women&subcat=Jeans">Jeans</a>
-                                      <a href="category.php?cat=Women&subcat=Kurtas">Kurtas</a>
-                                      <a href="category.php?cat=Women&subcat=Tops">Tops</a>
-                                      <a href="category.php?cat=Women&subcat=Sandals">Sandals</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown2">
-                                <a class="nav-link" href="javascript:void(0);">Kids <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
-                                <div class="dropdown-content2 animated fadeInUp faster">
-                                      <a href="category.php?cat=Boys&subcat=Tshirts">Boy's Clothing</a>
-                                      <a href="category.php?cat=Girls&subcat=Tops">Girl's Clothing</a>
-            
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown2">
-                                <a class="nav-link" href="javascript:void(0);">Shoes <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
-                                    <div class="dropdown-content2 animated fadeInUp faster">
-                                      <a href="category.php?cat=Men&subcat=Shoes">Men</a>
-                                      <a href="category.php?cat=Women&subcat=Shoes">Women</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown2">
-                                    <a class="nav-link" href="category.php?cat=Electronics">Electronics <i class="fa fa-caret-down text-custom-2 font-sm"></i> </a>
-                                    <div class="dropdown-content2 animated fadeInUp faster">
-                                      <a href="category.php?cat=Electronics&subcat=Phones">Phones</a>
-                                      <a href="category.php?cat=Electronics&subcat=Laptops">Laptops</a>
-                                      <a href="category.php?cat=Electronics&subcat=Cameras">Cameras</a>
 
                                     </div>
                                 </li>

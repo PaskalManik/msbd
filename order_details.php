@@ -13,11 +13,8 @@
          header('Location: login.php');
     }
 
-    $oid = $_GET['id'];
-
-    
+    $oid = $_GET['id'];  
 ?>
-
     <div class="container">
         <div class="custom-card my-4 py-3">
             <h3 class="text-left text-orange">Order Information </h3>
@@ -41,7 +38,7 @@
                 <div class="col-8">
                     <h4 class="text-orange"> Shipment details </h4> 
                     <h4 class="my-3"> <?php echo $row["product_name"]; ?></h4>
-                    <p> Price: ₹<?php echo $row["product_price"]; ?> </p>
+                    <p> Price: Rp<?php echo $row["product_price"]; ?> </p>
                     <p>Status: <?php echo $row["order_status"]; ?></p>
                     <p> Date: <?php echo $row["order_date"]; ?> </p>
                     <p> Qty: <?php echo $row["product_qty"]; ?> </p>
@@ -52,7 +49,6 @@
                     <hr class="py-2">
                     <h4 class="text-orange"> Payment information </h4>
                     <h6 class="my-3"><?php echo $row["payment_mode"]; ?></h6>
-                    <p> * COD - Cash on Delivery</p>
                     <hr class="py-2">
                     
                 </div>

@@ -3,9 +3,12 @@
       
       session_start();
 
-      if($_SESSION["admin"]==""){
-        header('Location: admin-login.php');
-      }
+      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+        // Jika tidak login atau bukan admin, arahkan ke login
+        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+        header('Location: ../login.php'); // Arahkan ke halaman login utama
+        exit();
+    }
 
       include './inc/header.php';
       include './inc/sidebar.php';
@@ -68,8 +71,8 @@
                                       <h5 class="my-3"><?php echo $row['product_name'] ?></h5>
                                     </a>
                                       <p>Order ID: #<?php echo $row['order_id'] ?></p>
-                                      <p>Qty: <?php echo $row['product_qty'] ?></p>
-                                      <p>Total: ₹<?php echo $row['order_total'] ?></p>
+                                      <p>Qty: <?php echo $row['product_qty']  ?></p>
+                                      <p>Total: Rp<?php echo $row['order_total'] ?></p>
                                       <p>Ordered by: <?php echo $row['firstname'].' '.$row['lastname'] ?> </p>
                                       <p>Status: <span class="text-orange"><?php echo $row['order_status'] ?> </span></p>
                               </div>

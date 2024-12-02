@@ -3,9 +3,12 @@
       
       session_start();
 
-      if($_SESSION["admin"]==""){
-        header('Location: admin-login.php');
-      }
+      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+        // Jika tidak login atau bukan admin, arahkan ke login
+        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+        header('Location: ../login.php'); // Arahkan ke halaman login utama
+        exit();
+    }
 
       include './inc/header.php';
       include './inc/sidebar.php';
@@ -94,7 +97,7 @@
                                     </div>
                                      <div class="col-md-7">
                                         <p><strong><?php echo $row['product_name'];  ?> </strong> </p>
-                                        <p> Price: ₹<?php echo $row['product_price'];  ?></p>
+                                        <p> Price: Rp<?php echo $row['product_price'];  ?></p>
                                         <p> Category: <?php echo $row['product_category'];  ?></p>
                                         <p> Qty: <?php echo $row['product_qty'];  ?></p>
                                      </div>

@@ -33,4 +33,9 @@
           <i class="fa fa-ticket"></i>
           <span>Tickets</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin-request.php">
+          <i class="fa fa-ticket"></i>
+          <span>Request Products</span></a>
+      </li>
     </ul>

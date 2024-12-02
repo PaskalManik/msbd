@@ -3,9 +3,12 @@
       
       session_start();
 
-      if($_SESSION["admin"]==""){
-        header('Location: admin-login.php');
-      }
+      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+        // Jika tidak login atau bukan admin, arahkan ke login
+        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+        header('Location: ../login.php'); // Arahkan ke halaman login utama
+        exit();
+    }
 
       include './inc/header.php';
       include './inc/sidebar.php';
@@ -75,10 +78,10 @@
                   <div class="ml-2">
                     <h4 class="text-orange"> Shipment details </h4> 
                     <h4 class="my-3"> <?php echo $row["product_name"]; ?></h4>
-                    <p> Price: ₹<?php echo $row["product_price"]; ?> </p>
+                    <p> Price: Rp<?php echo $row["product_price"]; ?> </p>
                     <p> Date: <?php echo $row["order_date"]; ?> </p>
                     <p> Qty: <?php echo $row["product_qty"]; ?> </p>
-                    <p> Total: ₹<?php echo $row["product_price"]*$row["product_qty"]; ?> </p>
+                    <p> Total: Rp<?php echo $row["product_price"]*$row["product_qty"]; ?> </p>
                     <p class="text-orange">Status: <?php echo $row["order_status"]; ?> 
                       <a href="javascript:void(0);" class="btn custom-btn ml-4" data-toggle="modal" data-target="#statusChangeModal">Change</a>
                     </p>
@@ -90,7 +93,6 @@
                     <hr class="py-2">
                     <h4 class="text-orange"> Payment information </h4>
                     <h6 class="my-3"><?php echo $row["payment_mode"]; ?></h6>
-                    <p> * COD - Cash on Delivery</p>
                     <hr class="py-2">
                     
                 </div>
