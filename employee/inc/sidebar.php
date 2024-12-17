@@ -10,13 +10,8 @@
       </li>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="work-progress.php">
+        <a class="nav-link" href="employee-work.php">
           <i class="fa fa-ticket"></i>
           <span>Pengerjaan</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fa fa-ticket"></i>
-          <span>Request Products</span></a>
       </li>
     </ul>

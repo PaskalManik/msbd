@@ -1,180 +1,112 @@
 <?php
 ob_start();
-
-
 include './inc/header.php';
+include './inc/db_connect.php';
 
 $_SESSION["ref"] = "cart";
-
-
-if (!empty($_COOKIE['item'])) {
-
-    foreach ($_COOKIE['item'] as $name1 => $value) {
-
-        if (isset($_POST["delete$name1"])) {
-
-            setcookie("item[$name1]", "", time() - 1800);
+$user_id = $_SESSION['user_id'];
+$oke = mysqli_query($conn, "SELECT * FROM cart_view WHERE user_id = '$user_id'");
 
 ?>
-
-            <script type="text/javascript">
-                window.location.href = window.location.href;
-            </script>
-
-<?php
-        }
-    }
-}
-
-
-?>
-
-<!-- Beardcumb -->
-<div class="custom-card p-0 card-shadow">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb container">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Cart</li>
-        </ol>
-    </nav>
-</div>
-
-<!-- End Beardcumb -->
 
 <div class="container">
     <div class="row my-4">
         <div class="col-md-12">
             <div class="order-summary clearfix custom-card">
-
-
-
                 <?php
-
-                $d = 0;
-
-                if (!empty($_COOKIE['item'])) {
-                    $d = $d + 1;
-                }
-
-                if ($d == 0) {
-
-                ?>
-                    <div class="py-5 my-5 text-center">
-                        <img src="img/opps-icon.png" alt="placeholder+image">
-                        <h4 class="text-center text-dark  my-2">Opps! No items in cart </h4>
-                        <a href="index.php" class="btn custom-btn mt-5">LET'S ADD <i class="fa text-white fa-angle-right"></i> </a>
-                    </div>
-                <?php
+                if (mysqli_num_rows($oke) == 0) {
+                    echo "<div class='py-5 my-5 text-center'>
+                            <h4>Opps! No items in cart</h4>
+                            <a href='index.php' class='btn custom-btn'>Start Shopping</a>
+                          </div>";
                 } else {
-
-
+                    $g_total = 0;
                 ?>
-                    <div class="section-title">
-                        <h3 class="text-orange py-3 text">Order Review</h3>
-                    </div>
-                    <table class="shopping-cart-table table py-5">
+                    <table class="shopping-cart-table table">
                         <thead>
                             <tr>
                                 <th>Product</th>
-                                <th></th>
-                                <th class="text-center">Price</th>
-                                <th class="text-center">Quantity</th>
-                                <th class="text-center">Total</th>
-                                <th class="text-right"></th>
+                                <th>Nama</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <?php
-
-                            // getting items from cookie
-
-
-                            foreach ($_COOKIE['item'] as $name1 => $value1) // looping in cookie
-                            {
-
-                                $values11 = explode("__", $value1);
-
+                            <?php 
+                            while ($value = mysqli_fetch_assoc($oke)) {
+                                $g_total += $value['TotalHarga'];
                             ?>
-
                                 <tr>
-                                    <td class="thumb img-fluid"><img src="./admin/<?php echo $values11[0] ?>" alt=""></td>
-                                    <td class="details">
-                                        <h5><?php echo $values11[1] ?></h5>
+                                    <td><img src="./admin/<?php echo $value['product_img']; ?>" width="50"></td>
+                                    <td><?php echo $value['product_name']; ?></td>
+                                    <td>Rp<?php echo $value['product_price']; ?></td>
+                                    <td>
+                                        <form method="POST" class="d-inline">
+                                            <input type="hidden" name="product_id" value="<?php echo $value['id']; ?>">
+                                            <button type="submit" name="decreaseBtn" class="btn btn-sm btn-outline-danger">-</button>
+                                        </form>
+                                        <span><?php echo $value['quantity']; ?></span>
+                                        <form method="POST" class="d-inline">
+                                            <input type="hidden" name="product_id" value="<?php echo $value['id']; ?>">
+                                            <button type="submit" name="increaseBtn" class="btn btn-sm btn-outline-success">+</button>
+                                        </form>
                                     </td>
-                                    <td class="price text-center"><strong>Rp<?php echo $values11[2] ?></strong></td>
-                                    <td class="qty text-center"><input class="input" type="text" value="<?php echo $values11[3] ?>" readonly></td>
-                                    <td class="total text-center"><strong class="primary-color">Rp<?php echo $values11[4] ?></strong></td>
-                                    <td class="text-right">
-                                        <form method="POST" action="">
-                                            <button class="btn custom-btn" name="delete<?php echo $name1; ?>"><i class="fa fa-close text-white"></i></button>
+                                    <td>Rp<?php echo $value['TotalHarga']; ?></td>
+                                    <td>
+                                        <form method="POST">
+                                            <input type="hidden" name="product_id" value="<?php echo $value['id']; ?>">
+                                            <button name="deleteBtn" class="btn btn-sm btn-outline-danger">Remove</button>
                                         </form>
                                     </td>
                                 </tr>
-
-
-                            <?php
-                            }
-
-                            ?>
-
-
+                            <?php } ?>
                         </tbody>
                         <tfoot>
-
-                            <?php
-
-                            // Making Grand Total
-
-                            $g_total = 0;
-
-                            foreach ($_COOKIE['item'] as $name1 => $value1) // looping in cookie
-                            {
-
-                                $values11 = explode("__", $value1);
-
-                                $g_total =  $g_total + $values11[4];
-                            }
-
-                            $_SESSION["total"] =  $g_total;
-
-                            ?>
                             <tr>
-                                <th class="empty" colspan="3"></th>
-                                <th>SUBTOTAL</th>
-                                <th colspan="2" class="sub-total">Rp<?php echo $g_total ?></th>
-                            </tr>
-                            <tr>
-                                <th class="empty" colspan="3"></th>
-                                <th>SHIPING</th>
-                                <td colspan="2">Free Shipping</td>
-                            </tr>
-                            <tr>
-                                <th class="empty" colspan="3"></th>
-                                <th>TOTAL</th>
-                                <th colspan="2" class="total">Rp <?php echo $g_total ?></th>
+                                <th colspan="4">TOTAL</th>
+                                <th>Rp<?php echo $g_total; ?></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
-                    <div class="pull-right">
-                        <a href="checkout.php?ref=<?php echo $_SESSION['ref'] ?>" class="btn custom-btn primary-btn">Place Order</a>
-                    </div>
-
-                <?php
-
-                }
-
-                ?>
-
-
+                    <a href="checkout.php" class="btn custom-btn">Checkout</a>
+                <?php } ?>
             </div>
-
         </div>
     </div>
 </div>
 
-
 <?php
+// Handle Remove Item
+if (isset($_POST['deleteBtn'])) {
+    mysqli_query($conn, "DELETE FROM cart WHERE id = '$_POST[product_id]'");
+    echo "<script>alert('Item removed from cart');</script>";
+    echo "<script>window.location.href = 'cart.php';</script>";
+}
+
+// Handle Increase Quantity
+if (isset($_POST['increaseBtn'])) {
+    $product_id = $_POST['product_id'];
+    mysqli_query($conn, "UPDATE cart SET quantity = quantity + 1 WHERE id = '$product_id'");
+    echo "<script>window.location.href = 'cart.php';</script>";
+}
+
+// Handle Decrease Quantity
+if (isset($_POST['decreaseBtn'])) {
+    $product_id = $_POST['product_id'];
+    // Check if quantity > 1 before decreasing
+    $result = mysqli_query($conn, "SELECT quantity FROM cart WHERE id = '$product_id'");
+    $row = mysqli_fetch_assoc($result);
+    if ($row['quantity'] > 1) {
+        mysqli_query($conn, "UPDATE cart SET quantity = quantity - 1 WHERE id = '$product_id'");
+    } else {
+        echo "<script>alert('Minimum quantity is 1');</script>";
+    }
+    echo "<script>window.location.href = 'cart.php';</script>";
+}
+
 include './inc/footer.php';
 ob_end_flush();
 ?>

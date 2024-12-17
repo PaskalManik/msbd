@@ -10,7 +10,7 @@ $id = $_GET["id"];
 $res = mysqli_query($conn, "SELECT * FROM products WHERE id=$id");
 
 while ($row = mysqli_fetch_array($res)) {
-    $cat = $row["product_category"];
+    $cat = $row["product_slider"];
     $img_arr = $row["product_preview"];
     $img_arr = unserialize($img_arr);
 ?>
@@ -20,7 +20,6 @@ while ($row = mysqli_fetch_array($res)) {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb container">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="category.php?cat=<?php echo $row["product_category"] ?>"><?php echo $row["product_category"] ?></a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $row["product_name"] ?></li>
             </ol>
         </nav>
@@ -61,13 +60,9 @@ while ($row = mysqli_fetch_array($res)) {
             <div class="col-md-6">
                 <div class="product-detail">
                     <div class="zoom-container">
-                        <div class="product-label">
-                            <span class="badge custom-badge-light bg-orange">NEW</span>
-                            <span class="badge custom-badge-light bg-dark"><?php echo $row["product_tag"] ?></span>
-                        </div>
+                        
 
                         <h2 class="product-name pt-4 pb-3"><?php echo $row["product_name"] ?></h2>
-                        <h3 class="product-price">Rp<?php echo $row["product_price"] ?> <del class="product-old-price">Rp<?php echo $row["product_old_price"] ?></del></h3>
                         <div>
                             <div class="product-rating d-inline-block">
                                 <i class="fa fa-star"></i>
@@ -80,54 +75,28 @@ while ($row = mysqli_fetch_array($res)) {
                         </div>
                         <p class="pt-4"><strong>Availability :</strong>
                             <?php
-                            if ($row["product_qty"] > 0) {
+                            if ($row["product_stock"] > 0) {
                                 echo '<span class="text-success">In Stock</span>';
                             } else {
                                 echo '<span class="text-danger">Out of Stock</span>';
                             }
                             ?>
-                        </p
-                            <p><strong>Brand :</strong> <?php echo $row["product_brand"] ?> </p>
+                        </p>
+                        
                         <p>
-                            <?php echo $row["product_description"] ?>
+                            <p><Strong> Stock :</Strong> <?php echo $row["product_stock"] ?> </p>
+                        </p>
+                        <p>
+                            <p><Strong> Description :</Strong> <?php echo $row["product_description"] ?> </p>
                         </p>
                     </div>
                     <hr class="py-2">
                     <div class="product-options">
-                        <?php
-                        if ($row["product_category"] == 'Shoes' || $row["product_category"] == 'Men' || $row["product_category"] == 'Women') {
-                        ?>
-                            <ul class="p-0 size-option">
-                                <li><span class="text-uppercase">Size:</span></li>
-                                <li class="active"><a href="#">S</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">SL</a></li>
-                            </ul>
-                            <ul class="p-0 color-option">
-                                <li><span class="text-uppercase">Color:</span></li>
-                                <li class="active"><a href="#" style="background-color:#475984;"></a></li>
-                                <li><a href="#" style="background-color:#8A2454;"></a></li>
-                                <li><a href="#" style="background-color:#BF6989;"></a></li>
-                                <li><a href="#" style="background-color:#9A54D8;"></a></li>
-                            </ul>
-                        <?php
-                        } else {
-                        ?>
-                            <ul class="p-0 color-option">
-                                <li><span class="text-uppercase">Color:</span></li>
-                                <li class="active"><a href="#" style="background-color:#475984;"></a></li>
-                                <li><a href="#" style="background-color:#8A2454;"></a></li>
-                                <li><a href="#" style="background-color:#BF6989;"></a></li>
-                                <li><a href="#" style="background-color:#9A54D8;"></a></li>
-                            </ul>
-                        <?php
-                        }
-                        ?>
                     </div>
                     <form name="add-cart-form" action="" method="POST">
                         <div> Quantity: <input type="text" name="order-qty" value="1" style="width: 60px"></div>
                         <div class="d-inline-block my-3">
-                            <button type="submit" name="add-cart-btn" class="btn custom-btn" title="Add item to Cart" <?php if ($row["product_qty"] < 1) {
+                            <button type="submit" name="add-cart-btn" class="btn custom-btn" title="Add item to Cart" <?php if ($row["product_stock"] < 1) {
                                 echo 'disabled';
                             } ?>><i class="fa fa-cart-plus text-white"></i> ADD TO CART</button>
                         </div>
@@ -146,7 +115,6 @@ while ($row = mysqli_fetch_array($res)) {
             <div class="col-md-12">
                 <div class="list-group my-5 py-2 position-relative" id="product-desc-list" role="tablist">
                     <a class="list-group-item-action active d-inline-block" data-toggle="list" href="#description" role="tab">DESCRIPTION</a>
-                    <a class="list-group-item-action d-inline-block" data-toggle="list" href="#details" role="tab">DETAILS</a>
                     <a class="list-group-item-action d-inline-block" data-toggle="list" href="#reviews" role="tab">REVIEWS (3)</a>
                 </div>
 
@@ -154,10 +122,6 @@ while ($row = mysqli_fetch_array($res)) {
                 <div class="tab-content" class="mt-4">
                     <div class="tab-pane active" id="description" role="tabpanel">
                         <P>DESCRIPTION :</P>
-                        <p> <?php echo $row["product_description"] ?> </p>
-                    </div>
-                    <div class="tab-pane" id="details" role="tabpanel">
-                        <P>DETAILS :</P>
                         <p> <?php echo $row["product_description"] ?> </p>
                     </div>
                     <div class="tab-pane" id="reviews" role="tabpanel">
@@ -272,16 +236,16 @@ while ($row = mysqli_fetch_array($res)) {
 // add to cart  
 
 if (isset($_POST['add-cart-btn'])) {
-    $d = 0;
+    // $d = 0;
 
-    if (!empty($_COOKIE['item'])) {
-        foreach ($_COOKIE['item'] as $name => $value) {
-            $d = $d + 1;
-        }
-        $d = $d + 1;
-    } else {
-        $d = $d + 1;
-    }
+    // if (!empty($_COOKIE['item'])) {
+    //     foreach ($_COOKIE['item'] as $name => $value) {
+    //         $d = $d + 1;
+    //     }
+    //     $d = $d + 1;
+    // } else {
+    //     $d = $d + 1;
+    // }
 
     // getting item data from database 
     $item_info = mysqli_query($conn, "SELECT * FROM products WHERE id=$id");
@@ -289,24 +253,21 @@ if (isset($_POST['add-cart-btn'])) {
         $p_img = $row3["product_img"];
         $p_name = $row3["product_name"];
         $p_price = $row3["product_price"];
-        $p_qty = $row3["product_qty"];
+        $p_qty = $row3["product_stock"];
         $qty = $_POST['order-qty'];
         $total = $p_price * $qty;
+        $uid = $_SESSION['user_id'];
 
-        // Validate if requested quantity is available
         if ($qty <= $p_qty) {
-            // Update product quantity in database
             $new_qty = $p_qty - $qty;
-            mysqli_query($conn, "UPDATE products SET product_qty = $new_qty WHERE id = $id");
-
-            if (!empty($_COOKIE['item'])) {
-                foreach ($_COOKIE['item'] as $name1 => $value1) {
-                    $values11 = explode("__", $value1);
+            mysqli_query($conn, "UPDATE products SET product_stock = $new_qty WHERE id = $id");
+            $cart = mysqli_query($conn, "SELECT * FROM cart_view WHERE user_id = $uid");
+            if (mysqli_num_rows($cart) > 0) {
+                while ($row = mysqli_fetch_array($cart)) {
                     $found = 0;
-
-                    if ($p_img == $values11[0]) {
+                    if ($p_img == $row['product_img']) {
                         $found = $found + 1;
-                        $qty = $values11[3] + 1;
+                        $qty = $row['quantity'] + $qty;
 
                         if ($qty > $p_qty) {
 ?>
@@ -315,30 +276,25 @@ if (isset($_POST['add-cart-btn'])) {
                             </script>
                         <?php
                         } else {
-                            $total = $values11[2] * $qty;
-                            setcookie("item[$name1]", $p_img . "__" . $p_name . "__" . $p_price . "__" . $qty . "__" . $total, time() + 1800);
+                            $total = $row['product_price'] * $qty;
+                            mysqli_query($conn, "UPDATE cart SET quantity = $qty WHERE user_id = $uid AND id = $id; ");
+                            echo "masuk";
                         ?>
-                            <script type="text/javascript">
-                                window.location.href = window.location.href;
-                            </script>
+                            
                     <?php
                         }
                     }
                 }
                 if ($found == 0) {
-                    setcookie("item[$d]", $p_img . "__" . $p_name . "__" . $p_price . "__" . $qty . "__" . $total, time() + 1800);
+                    mysqli_query($conn, "INSERT INTO cart (user_id, id,quantity) VALUES ($uid, $id, $qty)");
                     ?>
-                    <script type="text/javascript">
-                        window.location.href = window.location.href;
-                    </script>
+                    
                 <?php
                 }
             } else {
-                setcookie("item[$d]", $p_img . "__" . $p_name . "__" . $p_price . "__" . $qty . "__" . $total, time() + 1800);
+                mysqli_query($conn, "INSERT INTO cart (user_id, id,quantity) VALUES ($uid, $id, $qty)");
                 ?>
-                <script type="text/javascript">
-                    window.location.href = window.location.href;
-                </script>
+                
             <?php
             }
         } else {
@@ -350,7 +306,7 @@ if (isset($_POST['add-cart-btn'])) {
         }
     }
 
-    $_SESSION['d'] = $d;
+    // $_SESSION['d'] = $d;
 }
 
 ?>
@@ -365,18 +321,18 @@ if (isset($_POST['add-cart-btn'])) {
     <div class="container">
         <div class="text-left">
             <div class="" style="border-bottom: 1px solid #000;">
-                <h3 class="badge badge-primary custom-badge-light" style="margin-bottom: 0px;">PICKED FOR YOU</h3>
+                <h3 class="badge badge-primary custom-badge-light" style="margin-bottom: 0px;">Another Product </h3>
             </div>
             <section class="picks-slider slider">
                 <?php
 
-                $res = mysqli_query($conn, "SELECT * FROM products WHERE product_category='$cat' ");
+                $res = mysqli_query($conn, "SELECT * FROM products WHERE product_slider='$cat' ");
                 while ($row = mysqli_fetch_array($res)) {
 
                 ?>
 
                     <div class="product position-relative">
-                        <div class="badge product-badge custom-badge-light">NEW</div>
+                        <div class="badge product-badge custom-badge-light"></div>
                         <div class="custom-card p-0">
                             <img class="img-fluid product-img" src="./admin/<?php echo $row["product_img"] ?>">
                             <div class="p-2">

@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title>E-CART - Online Shopping Site</title>
+	<title>IyongTailor - Convection Business</title>
 
 	<!-- Google fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -50,8 +50,8 @@
     <link rel="stylesheet" media="screen, projection" href="css/drift-basic.css">
 	
 	<!-- Favicon -->
-	<link rel="icon" href="./img/favicon.png" type="image/x-icon"/>
-	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon"/>
+	<link rel="icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
 	
 
 </head>
@@ -62,7 +62,11 @@
         <section>
             <nav class="navbar navbar-dark bg-orange py-2">
                 <div class="container">
-                <a class="logo my-1" style="text-decoration: none;" href="index.php"><h2 class="text-center"> <img src="img/icon.png"> <span class="text-orange">E-</span><span class="text-custom-1">CART</span> </h2></a>
+                <a class="logo my-1" style="text-decoration: none;" href="index.php">
+    <h2 class="text-center">
+        <img src="./img/icon_iyongtailor.png" style="max-width: 300px; height: 70px;">
+    </h2>
+</a>
                 <div class=" my-1">
                     <ul class="navbar-nav" style="flex-direction: row;">
                         
@@ -117,7 +121,10 @@
                                 <a class="nav-link" href="index.php"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Home</span> <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item active">
-                                <a class="nav-link" href="request-product.php"> <span><i class="fa fa-home text-white" aria-hidden="true"></i> Request Product</span> <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="request-product.php"> <span><i class="fa fa-pencil text-white" aria-hidden="true"></i> Request Product</span> <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                <a class="nav-link" href="info-request.php"> <span><i class="fa fa-info-circle text-white" aria-hidden="true"></i> Info Request</span> <span class="sr-only">(current)</span></a>
                                 </li>
 
 

@@ -1,5 +1,5 @@
 <!-- Sticky Footer -->
-      <footer class="sticky-footer">
+<footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span> <p class="text-muted"> Copyright &copy; <script>document.write(new Date().getFullYear());</script> | All rights reserved </p> </span>
@@ -47,7 +47,7 @@
 
   
   <!-- Custom scripts for all pages-->
-  <script src="js/admin.min.js"></script>
+  <script src="./js/admin.min.js"></script>
 
 </body>
 

@@ -30,7 +30,7 @@ if (isset($_POST['signup-btn'])) {
         $verification_code = rand(100000, 999999);
 
         $insert_query = "INSERT INTO users (firstname, lastname, email, password, contact_no, is_verified, verification_code, role) 
-                         VALUES ('$fname', '$lname', '$email', '$password', '$contact_no', 0, '$verification_code', '$role')";
+                         VALUES ('$fname', '$lname', '$email', '$password', '$contact_no', 0, '$verification_code', 'customer')";
         mysqli_query($conn, $insert_query);
 
         $mail = new PHPMailer(true);
@@ -38,12 +38,12 @@ if (isset($_POST['signup-btn'])) {
             $mail->isSMTP();
             $mail->Host = 'sandbox.smtp.mailtrap.io';
             $mail->SMTPAuth = true;
-            $mail->Username = '982d6f7babef0b';
-            $mail->Password = '5fef16045dce69';
+            $mail->Username = 'c31033338268e6';
+            $mail->Password = '15652e8119508d';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('noreply@ecart.com', 'E-Cart');
+            $mail->setFrom('IyongTailor@gmail.com', 'IyongTailor');
             $mail->addAddress($email, "$fname $lname");
 
             $mail->isHTML(true);
@@ -51,12 +51,12 @@ if (isset($_POST['signup-btn'])) {
             $mail->Body = "
                 <html>
                     <head>
-                        <title>Hi $fname - ECART</title>
+                        <title>Hi $fname - IyongTailor</title>
                     </head>
                     <body style='text-align: center;'>
                         <div>
                             <h1 class='text-center'>
-                                <span style='color: #F8694A'>E-</span><span>CART</span>
+                                <span style='color: #F8694A'>Iyong</span><span>Tailor</span>
                             </h1>
                         </div>
                         <br>
@@ -90,7 +90,7 @@ if (isset($_POST['signup-btn'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Signup - E-CART</title>
+    <title>Signup - IyongTailor</title>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -100,6 +100,10 @@ if (isset($_POST['signup-btn'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon -->
+	<link rel="icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -108,8 +112,11 @@ if (isset($_POST['signup-btn'])) {
             <div class="col-md-4"></div>
             <div class="col-md-4 py-4">
                 <div class="card p-3">
-                    <h3 class="text-center py-1"><span class="text-orange">E-</span><span class="text-custom-1">CART</span></h3>
-
+                <a class="logo my-1" style="text-decoration: none;" href="index.php">
+    <h2 class="text-center">
+        <img src="./img/icon_iyongtailor.png" style="max-width: 300px; height: 70px;">
+    </h2>
+</a>
                     <!-- Sign Up form -->
                     <div id="signup" class="py-2">
                         <h6 class="text-center text-orange">Create an account</h6>
@@ -161,13 +168,6 @@ if (isset($_POST['signup-btn'])) {
                                     </div>
                                     <input type="password" class="form-control" name="pass2" placeholder="Confirm Password" required>
                                 </div>
-                            </div>
-                            <div class="py-3">
-                                <select name="role" id="role" class="form-control">
-                                    <option value="customer">Customer</option>
-                                    <option value="employee">Employee</option>
-                                    <option value="admin">Admin</option>
-                                </select>
                             </div>
                             <button type="submit" class="btn btn-block custom-btn mt-3" name="signup-btn">Sign Up</button>
                             <div class="text-center pt-4 pb-1">

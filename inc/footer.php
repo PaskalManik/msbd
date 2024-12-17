@@ -5,8 +5,11 @@
             <div class="row my-5">
                 <div class="col-md-3 text-center">
                     <div>
-                        <a class="logo" href="#"><h2 class="text-center"><span class="text-white">E-</span><span class="text-orange">CART</span> </h2></a>
-                    <p class="mx-2 my-3">E-Cart is an online store from where you can shop you daily needs.</p>
+                    <a class="logo my-1" style="text-decoration: none;" href="index.php">
+    <h2 class="text-center">
+        <img src="./img/icon_iyongtailor2.png" style="max-width: 300px; height: 70px;">
+    </h2>
+</a>                    <p class="mx-2 my-3">IyongTailor is an online store from where you can shop you daily needs.</p>
                     <ul class="p-0 social-links" style="list-style: none;">
                         <li class="d-inline-block m-2"> <a href="javascript:void(0);"><i class="fa fa-facebook-official text-white" aria-hidden="true"></i></a> </li>
                         <li class="d-inline-block m-2"> <a href="javascript:void(0);"><i class="fa fa-twitter text-white" aria-hidden="true"></i></a>  </li>
@@ -43,7 +46,7 @@
 
 
                     <ul class="p-0" style="list-style: none;">
-                        <li> <i class="fa fa-envelope text-white m-2" aria-hidden="true"></i> <a href="mailto:help@e-cart.com" class="text-white">help@e-cart.com</a></li>
+                        <li> <i class="fa fa-envelope text-white m-2" aria-hidden="true"></i> <a href="mailto:help@IyongTailor.com" class="text-white">help@IyongTailor.com</a></li>
                         <li> <i class="fa fa-phone text-white m-2" aria-hidden="true"></i> <a href="tel:+919800126181" class="text-white">+91 (980)-012-6181</a></li>
                     </ul>
                 </div>

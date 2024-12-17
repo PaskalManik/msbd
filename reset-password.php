@@ -41,25 +41,25 @@ if (isset($_POST['reset-pwd'])) {
 			$mail->isSMTP();
 			$mail->Host = 'sandbox.smtp.mailtrap.io';
 			$mail->SMTPAuth = true;
-			$mail->Username = '982d6f7babef0b';
-			$mail->Password = '5fef16045dce69';
+			$mail->Username = 'c31033338268e6';
+			$mail->Password = '15652e8119508d';
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 			$mail->Port = 587;
 
-            $mail->setFrom('admin@ecart.cf', 'E-Cart');
-            $mail->addAddress($uemail); // Email penerima
+            $mail->setFrom('admin@IyongTailor', 'IyongTailor');
+            $mail->addAddress($uemail); 
 
             $mail->isHTML(true);
-            $mail->Subject = 'Password Reset - ECART';
+            $mail->Subject = 'Password Reset - IyongTailor';
             $mail->Body = "
                 <html>
                     <head>
-                        <title>Password Reset - ECART</title>
+                        <title>Password Reset - IyongTailor</title>
                     </head>
                     <body style='text-align: center;'>
                         <div>
                             <h1 class='text-center'>
-                                <span style='color: #F8694A'>E-</span><span>CART</span>
+                                <span style='color: #F8694A'>Iyong</span><span>Tailor</span>
                             </h1>
                         </div>
                         <br>
@@ -92,7 +92,7 @@ if (isset($_POST['reset-pwd'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password - E-CART</title>
+    <title>Reset Password - IyongTailor</title>
 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -107,7 +107,7 @@ if (isset($_POST['reset-pwd'])) {
             <div class="col-md-4 py-4">
                 <div class="card p-3">
                     <div class="logo">
-                        <h3 class="text-center py-1"><span class="text-orange">E-</span><span class="text-custom-1">CART</span></h3>
+                        <h3 class="text-center py-1"><span class="text-orange">Iyong</span><span class="text-custom-1">Tailor</span></h3>
                     </div>
                     <p class="text-center pt-4 text-custom-1">Reset Password</p>
                     <form action="" method="POST" oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>

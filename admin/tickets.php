@@ -1,106 +1,80 @@
-<!-- header include -->
-    <?php  
-      
-      session_start();
+<?php
+session_start();
 
-      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
-        // Jika tidak login atau bukan admin, arahkan ke login
-        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
-        header('Location: ../login.php'); // Arahkan ke halaman login utama
-        exit();
-    }
+// Pastikan hanya admin yang bisa mengakses halaman ini
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+    header('Location: ../login.php');
+    exit();
+}
 
-      include './inc/header.php';
-      include './inc/sidebar.php';
+include './inc/header.php';
+include './inc/sidebar.php';
+include './inc/db_connect.php';
+?>
 
-      include './inc/db_connect.php';
-
-    ?>
-      
-
-
-  <!-- main content here -->
-
-    <div id="content-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Breadcrumbs-->
-        
-        <nav aria-label="breadcrumb ">
-         
-          <ol class="breadcrumb arr-right bg-light ">
-         
-            <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
-         
-            <li class="breadcrumb-item active" aria-current="page">Tickets</li>
-         
-          </ol>
-         
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb arr-right bg-light">
+                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Reports</li>
+            </ol>
         </nav>
 
-
         <!-- Page Content -->
+        <section>
+            <h3 class="text-orange text-center py-1">Reports</h3>
+            <div class="order px-3 my-4 custom-card">
+                <div class="row my-5 mx-5">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Report ID</th>
+                                <th scope="col">Order</th>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT * FROM Reports";
+                            $result = mysqli_query($conn, $query);
 
-      <section>
-                <h3 class="text-orange text-center py-1">Tickets</h3>
-                <div class="order px-3 my-4 custom-card">
-                  <div class="row my-5 mx-5 ">
-         <table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Ticket ID</th>
-            <th scope="col">Order</th>
-            <th scope="col">User ID</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Message</th>
-            <th scope="col">Status</th>
-        </tr>
-    </thead>
-                            
-                <!--insert query-->
-                <?php
-                  $disp = "SELECT * FROM tickets";
-                  //mysqli_query($conn,$query);
-                    $data = mysqli_query($conn,$disp);
-                       while( $result = mysqli_fetch_assoc($data))
-              {  
-                ?>
-
-                 <tr>
-               
-                            <td> <?php echo $result['ticket_id']; ?> </td>
-                            <td> 
-                              <a style="text-decoration: none;" href="order-details.php?id=<?php echo $result['order_id']; ?> ">
-                                <i class="fa text-dark fa-eye"></i> View
-                              </a>
-                            </td>
-                            <td> <?php echo $result['user_id']; ?> </td>
-                            <td> <?php echo $result['subject']; ?> </td>
-                            <td> <?php echo $result['message']; ?> </td>
-                            <td> <?php echo $result['status']; ?> </td>
-                           
-                        </tr>
-            
-                <?php
-              }
-                ?>
-           </table>
- 
-                  </div>
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['report_id']; ?></td>
+                                        <td>
+                                            <?php if (!empty($row['order_id'])): ?>
+                                                <a href="order-details.php?id=<?php echo $row['order_id']; ?>">
+                                                    <i class="fa text-dark fa-eye"></i> View
+                                                </a>
+                                            <?php else: ?>
+                                                <span class="text-danger">Order ID missing</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo $row['user_id']; ?></td>
+                                        <td><?php echo $row['subject']; ?></td>
+                                        <td><?php echo $row['message']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='6' class='text-center'>No reports found.</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-         </section>
-        
-      <?php 
-        
+            </div>
+        </section>
+    </div>
+</div>
 
-       ?> 
-        
-        <!-- / Page Content -->
-
-      <!-- /.container-fluid -->
-
-      
-      <?php 
-        include './inc/footer.php';
-       ?>
+<?php include './inc/footer.php'; ?>

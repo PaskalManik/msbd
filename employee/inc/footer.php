@@ -47,7 +47,7 @@
 
   
   <!-- Custom scripts for all pages-->
-  <script src="js/admin.min.js"></script>
+  <script src="./js/admin.min.js"></script>
 
 </body>
 

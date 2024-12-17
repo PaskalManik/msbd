@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin - Dashboard</title>
+  <title>Employee - Dashboard</title>
 
   
   <!-- Custom styles for Admin Dashboard-->
@@ -29,14 +29,21 @@
     }
   </style>
 
+  <!-- Favicon -->
+	<link rel="icon" href="../img/favicon_iyongtailor2.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
+
 </head>
 
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.php"> <span class="text-white">E-</span><span class="text-warning">CART</span> </a>
-
+  <a class="logo my-1" style="text-decoration: none;" href="index.php">
+    <h2 class="text-center">
+        <img src="../img/icon_iyongtailor2.png" style="max-width: 200px; height: 50px;">
+    </h2>
+</a>  
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fa fa-bars"></i>
     </button>

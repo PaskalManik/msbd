@@ -4,7 +4,7 @@
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="index.php">
-          <i class="fa fa-fw fa-tachometer-alt"></i>
+          <i class="fa fa-fw fa-pie-chart"></i>
           <span>Dashboard</span>
         </a>
       </li>
@@ -25,17 +25,33 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="users.php">
-          <i class="fa fa-fw fa-user"></i>
+          <i class="fa fa-users"></i>
           <span>All users</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="tickets.php">
           <i class="fa fa-ticket"></i>
-          <span>Tickets</span></a>
+          <span>Reports</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="admin-request.php">
-          <i class="fa fa-ticket"></i>
+          <i class="fa fa-pencil"></i>
           <span>Request Products</span></a>
+      </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin_menu.php">
+          <i class="fa fa-ticket"></i>
+          <span>Menu Barang</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="activity.php">
+          <i class="fa fa-blind"></i>
+          <span>Aktivitas</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin-employee.php">
+          <i class="fa fa-blind"></i>
+          <span>Employee Assignment</span></a>
       </li>
     </ul>

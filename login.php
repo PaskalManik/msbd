@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login/Signup - E-CART</title>
+    <title>Login/Signup - IyongTailor</title>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -57,6 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon -->
+	<link rel="icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./img/favicon_iyongtailor2.png" type="image/x-icon"/>
 </head>
 <body>
     <section class="container">
@@ -64,8 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-4"></div>
             <div class="col-md-4 py-4">
                 <div class="card p-3">
-                    <h3 class="text-center py-1"><span class="text-orange">E-</span><span class="text-custom-1">CART</span></h3>
-
+                <a class="logo my-1" style="text-decoration: none;" href="index.php">
+    <h2 class="text-center">
+        <img src="./img/icon_iyongtailor.png" style="max-width: 300px; height: 70px;">
+    </h2>
+</a>
                     <!-- Login Form -->
                     <div id="login" class="py-2">
                         <h6 class="text-center text-orange">Login</h6>

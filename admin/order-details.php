@@ -1,207 +1,170 @@
-<!-- header include -->
-    <?php  
-      
-      session_start();
+<?php  
+session_start();
 
-      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
-        // Jika tidak login atau bukan admin, arahkan ke login
-        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
-        header('Location: ../login.php'); // Arahkan ke halaman login utama
-        exit();
-    }
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+    header('Location: ../login.php');
+    exit();
+}
 
-      include './inc/header.php';
-      include './inc/sidebar.php';
+include './inc/header.php';
+include './inc/sidebar.php';
+include './inc/db_connect.php';
 
-      include './inc/db_connect.php';
+$oid = $_GET['id'];
 
-      $oid = $_GET['id'];
+?>
 
-    ?>
-      
+<!-- Main Content -->
+<div id="content-wrapper">
+  <div class="container-fluid">
 
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb arr-right bg-light">
+        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="orders.php">All Orders</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Order Information</li>
+      </ol>
+    </nav>
 
-  <!-- main content here -->
-
-    <div id="content-wrapper">
-
+    <!-- Page Content -->
+    <section>
       <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10 my-3">
+            <h3 class="text-orange text-center py-1">Order Information</h3>
+            <div class="container">
+              <div class="custom-card my-4 py-3">
 
-        <!-- Breadcrumbs-->
-        
-        <nav aria-label="breadcrumb ">
-         
-          <ol class="breadcrumb arr-right bg-light ">
-         
-            <li class="breadcrumb-item "><a href="index.php">Dashboard</a></li>
-
-            <li class="breadcrumb-item "><a href="orders.php">All Orders</a></li>
-         
-            <li class="breadcrumb-item active" aria-current="page">Order Information</li>
-         
-          </ol>
-         
-        </nav>
-
-
-        <!-- Page Content -->
-
-      <section>
-        <div class="container-fluid">
-           <div class="row">
-              <div class="col-md-1">
-              </div>
-
-              <div class="col-md-10 my-3">
-                <h3 class="text-orange text-center py-1">Order Information</h3>
-
-               
-
-<div class="container">
-        <div class="custom-card my-4 py-3">
-           
-        <div class="order px-3 my-4">
-
-            <?php 
-
-                 $res = mysqli_query($conn, "SELECT * FROM orders WHERE order_id=$oid ");
-                            
-                    while($row = mysqli_fetch_array($res)) {
-
-                    ?>
-
-                        <div class="row mt-4">
-                <div class="col-4">
-                    <span class="d-inline-block align-middle"><img class="img-fluid product-img p-2 d-inline-block" src="./<?php echo $row["product_img"]; ?>"></span>
-                </div>
-                <div class="col-8">
-                  <div class="ml-2">
-                    <h4 class="text-orange"> Shipment details </h4> 
-                    <h4 class="my-3"> <?php echo $row["product_name"]; ?></h4>
-                    <p> Price: Rp<?php echo $row["product_price"]; ?> </p>
-                    <p> Date: <?php echo $row["order_date"]; ?> </p>
-                    <p> Qty: <?php echo $row["product_qty"]; ?> </p>
-                    <p> Total: Rp<?php echo $row["product_price"]*$row["product_qty"]; ?> </p>
-                    <p class="text-orange">Status: <?php echo $row["order_status"]; ?> 
-                      <a href="javascript:void(0);" class="btn custom-btn ml-4" data-toggle="modal" data-target="#statusChangeModal">Change</a>
-                    </p>
+                <!-- Fetch Order Data -->
+                <?php 
+                $query = "
+                  SELECT 
+                    o.order_id, 
+                    o.order_date, 
+                    o.order_status, 
+                    o.payment_mode, 
+                    u.firstname, 
+                    u.lastname, 
+                    o.address, 
+                    o.city, 
+                    o.pincode,
+                    p.product_name,
+                    p.product_img,
+                    oi.quantity,
+                    (oi.quantity * oi.product_price) AS sub_total
+                  FROM orders o
+                  JOIN order_items oi ON o.order_id = oi.order_id
+                  JOIN products p ON oi.product_id = p.id
+                  JOIN users u ON o.user_id = u.user_id
+                  WHERE o.order_id = $oid
+                ";
+                
+                $res = mysqli_query($conn, $query);
+                $order_details = [];
+                
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $order_details[] = $row;
+                }
+                
+                if (count($order_details) > 0) {
+                ?>
+                  <div class="row mt-4">
+                    <div class="col-12 text-center">
+                      <h4 class="text-orange">Product Details</h4>
+                    </div>
                   </div>
-                </div>
-            </div>
-            <div class="row mb-3 pl-5">
-                <div class="col-12">
-                    <hr class="py-2">
-                    <h4 class="text-orange"> Payment information </h4>
-                    <h6 class="my-3"><?php echo $row["payment_mode"]; ?></h6>
-                    <hr class="py-2">
-                    
-                </div>
-                <div class="col-md-6 py-3">
-                    <h4 class="text-orange"> Billing Address </h4>
-                    <p> <?php echo $row["firstname"].' '.$row['lastname']; ?></p>
-                    <p> <?php echo $row["address"]; ?> </p>
-                    <p> <?php echo $row["city"]; ?> </p>
-                    <p> <?php echo $row["pincode"]; ?> </p>
-                </div>
-                <div class="col-md-6 py-3">
-                    <h4 class="text-orange"> Shipping Address </h4>
-                    <p> <?php echo $row["firstname"].' '.$row['lastname']; ?></p>
-                    <p> <?php echo $row["address"]; ?> </p>
-                    <p> <?php echo $row["city"]; ?> </p>
-                    <p> <?php echo $row["pincode"]; ?> </p>
-                </div>
-                </div>
-                <div class="text-center my-5">
-                    <h6>Contact the user? <a href="javascript:void(0);" class="text-orange btn custom-btn"><i class="fa fa-envelope-o"></i> Email Now</a></h6>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
+                  <div class="row mt-3">
+                    <?php foreach ($order_details as $item): ?>
+                      <div class="col-md-3 text-center">
+                        <img 
+                          class="img-fluid product-img mb-2 border rounded" 
+                          src="./<?php echo htmlspecialchars($item['product_img']); ?>" 
+                          alt="Product Image" 
+                          style="max-height: 150px; width: auto;">
+                        <p class="text-muted font-weight-bold"><?php echo htmlspecialchars($item['product_name']); ?></p>
+                        <p><strong>Quantity:</strong> <?php echo htmlspecialchars($item['quantity']); ?></p>
+                        <p><strong>Subtotal:</strong> Rp<?php echo number_format($item['sub_total'], 2); ?></p>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
+                  <hr class="py-2">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h4 class="text-orange">Shipping Address</h4>
+                      <p><?php echo htmlspecialchars($order_details[0]["firstname"] . ' ' . $order_details[0]["lastname"]); ?></p>
+                      <p><?php echo htmlspecialchars($order_details[0]["address"]); ?></p>
+                      <p><?php echo htmlspecialchars($order_details[0]["city"]); ?></p>
+                      <p><?php echo htmlspecialchars($order_details[0]["pincode"]); ?></p>
+                    </div>
+                  </div>
+                  <hr class="py-2">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><strong>Order Date:</strong> <?php echo $order_details[0]["order_date"]; ?></p>
+                      <p><strong>Total Price:</strong> Rp<?php echo number_format(array_sum(array_column($order_details, 'sub_total')), 2); ?></p>
+                    </div>
+                    <div class="col-md-6">
+                      <p><strong>Status:</strong> <span class="text-orange"><?php echo $order_details[0]["order_status"]; ?></span> 
+                        <a href="javascript:void(0);" class="btn custom-btn ml-4" data-toggle="modal" data-target="#statusChangeModal">Change</a>
+                      </p>
+                    </div>
+                  </div>
+                <?php } else { ?>
+                  <div class="alert alert-danger text-center">Order not found!</div>
+                <?php } ?>
 
                 <!-- Update Status Modal -->
-            
-              <div class="modal fade" id="statusChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Change Order Status?</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                     <p class="text-danger"> Warning: This Status will be visible to the user. Make sure the status is correct.</p>
-                      <div class="row py-3">
-                    <div class="col-6 pl-5 m-0">
-                      <span class="text-orange">Select the Status:</span>
-                    </div>
-                    <div class="col-6 pl-0 m-0"> 
-                      <form action="" method="POST" name="order-status">
-                      <select class="form-control" name="status" required>
-                      <option value="In-Process">In-Process</option>
-                      <option value="Approved">Approved</option>
-                      <option value="Cancelled">Cancelled</option>
-                      <option value="Shipped">Shipped</option>
-                      <option value="Delivered">Delivered</option>
-                      <option value="Returned">Returned</option>
-                    </select>
-                    </div>
-                  </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" name="submit-btn" class="btn custom-btn">Save changes</button>
-                    </form>
-                    <?php
-
+                <div class="modal fade" id="statusChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Change Order Status</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form method="POST" action="">
+                        <div class="modal-body">
+                          <p class="text-danger">This status will be visible to the user. Make sure it is correct.</p>
+                          <select class="form-control" name="status" required>
+                            <option value="In-Process">In-Process</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Complete">Complete</option>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" name="submit-btn" class="btn custom-btn">Save Changes</button>
+                        </div>
+                      </form>
+                      <?php
                       if (isset($_POST["submit-btn"])) {
-
-                        if (!mysqli_query($conn, " UPDATE orders SET order_status='$_POST[status]' WHERE order_id=$oid ")) {
-
-                        echo("Error description: " . mysqli_error($conn));
-                        
-                        } else{
-
-                          ?>
-                          <script type="text/javascript">
-                            alert('Order status updated successfuly!');
-                            window.location.href =  window.location.href;
-                          </script>
-                          <?php
+                        $status = mysqli_real_escape_string($conn, $_POST['status']);
+                        $update_query = "UPDATE orders SET order_status='$status' WHERE order_id=$oid";
+                        if (mysqli_query($conn, $update_query)) {
+                          echo "<script>alert('Order status updated successfully!'); window.location.href = window.location.href;</script>";
+                        } else {
+                          echo "Error updating status: " . mysqli_error($conn);
                         }
-                                
                       }
-
-                    ?>
+                      ?>
                     </div>
                   </div>
                 </div>
               </div>
-
-
-                    <?php
-
-                }
-
-             ?>
-
-                
-              </div>
-
-              <div class="col-md-1">
-              </div>
-           </div>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
         </div>
-      </section>
-        
-     
-        
-        <!-- / Page Content -->
+      </div>
+    </section>
+  </div>
+</div>
 
-      <!-- /.container-fluid -->
-
-      
-      <?php 
-        include './inc/footer.php';
-       ?>
+<?php 
+include './inc/footer.php';
+?>

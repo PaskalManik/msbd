@@ -1,27 +1,26 @@
 <?php
-      session_start();
+session_start();
 
-      include './inc/db_connect.php';
+include './inc/db_connect.php';
 
-      if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
-        // Jika tidak login atau bukan admin, arahkan ke login
-        echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
-        header('Location: ../login.php'); // Arahkan ke halaman login utama
-        exit();
-    }
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Unauthorized access! Please log in as admin.');</script>";
+    header('Location: ../login.php');
+    exit();
+}
 
-      $pid = $_GET['id'];
+$user_id = $_SESSION['user_id']; // Get the user_id from the session
 
-        // delete product
+$pid = $_GET['id']; // Get the product ID
 
-       
+// Set the user_id variable in MySQL session
+mysqli_query($conn, "SET @user_id = $user_id");
 
-        if(mysqli_query($conn, "DELETE FROM products WHERE id=$pid")){
-        
-          // redirect to products page after delete successfully
-        
-          header('Location: all_products.php'); 
-          
-        }
-
- ?>
+// Perform the DELETE operation
+if (isset($pid) && mysqli_query($conn, "DELETE FROM products WHERE id=$pid")) {
+    header('Location: all_products.php'); 
+} else {
+    echo "<script>alert('Failed to delete product.');</script>";
+}
+?>

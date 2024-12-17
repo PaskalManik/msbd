@@ -1,225 +1,134 @@
 <?php
 ob_start();
-
-include './inc/header.php';
 include './inc/db_connect.php';
+include './inc/header.php';
 
-
-// getting cookie no. used to remove cookies
-// upon order complete 
-
-if (isset($_SESSION['d'])) {
-
-	$d = $_SESSION['d'];
-}
-
-
-//checking page reffer
-
-$ref = $_GET["ref"];
-
-
-if ($ref != 'cart') {
-	header('Location: cart.php');
-}
-
-
-$total = $_SESSION["total"]; // order total
-
-
-
+// Pastikan pengguna sudah login
 if (!isset($_SESSION['loggedin'])) {
-
-	header("Location: login.php?ref=checkout");
+    header('Location: login.php');
+    exit;
 }
 
-
-?>
-
-<!-- Beardcumb -->
-<div class="custom-card p-0 card-shadow">
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb container">
-			<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-			<li class="breadcrumb-item"><a href="cart.php">Cart</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Checkout</li>
-		</ol>
-	</nav>
-</div>
-
-<!-- End Beardcumb -->
-
-<div class="container py-4">
+$uid = $_SESSION['user_id'];
 
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Simpan data personal pengguna di session (opsional, jika perlu digunakan nanti)
+    $_SESSION['personal_data'] = [
+        'firstname' => $_POST['firstname'],
+        'lastname' => $_POST['lastname'],
+        'email' => $_POST['email'],
+        'contact_no' => $_POST['contact_no'],
+        'address' => $_POST['address'],
+        'city' => $_POST['city'],
+        'pincode' => $_POST['pincode'],
+        'payment_mode' => $_POST['payment_mode']
+    ];
 
-	<div class="row">
+    // Simpan data pesanan ke tabel `orders`
+    $order_date = date("Y-m-d H:i:s");
+    $order_status = "Pending";
+    $payment_mode = $_POST['payment_mode'];
 
-		<div class="col-md-6 my-2">
-			<div class="alert alert-info" role="alert">
-				<i class="fa fa-info-circle"> </i> Please fill the details below.
-			</div>
+    $insert_order = "INSERT INTO orders 
+                    (user_id, address, firstname, lastname, email, contact_no, city, pincode, payment_mode, order_date, order_status) 
+                    VALUES ('$uid', '{$_POST['address']}', '{$_POST['firstname']}', '{$_POST['lastname']}', '{$_POST['email']}', 
+                            '{$_POST['contact_no']}', '{$_POST['city']}', '{$_POST['pincode']}', 
+                            '$payment_mode', '$order_date', '$order_status')";
+    mysqli_query($conn, $insert_order);
 
-			<h4 class="">Delivery Address</h4>
+    // Ambil ID order yang baru saja dibuat
+    $order_id = mysqli_insert_id($conn);
 
-			<form method="POST" action="" class="my-4">
-				<div class="form-group">
-					<label>First Name</label>
-					<input type="text" class="form-control" placeholder="First Name" name="fname" value="<?php echo $_SESSION['firstname'] ?>" required>
-				</div>
-				<div class="form-group">
-					<label>Last Name</label>
-					<input type="text" class="form-control" placeholder="Last Name" name="lname" value="<?php echo $_SESSION['lastname'] ?>" required>
-				</div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" autocomplete="off" placeholder="Enter email" name="email" value="<?php echo $_SESSION['user_email'] ?>" required>
-				</div>
-				<div class="form-group">
-					<label>Address</label>
-					<input type="text" class="form-control" placeholder="Address" name="address" required>
-				</div>
-				<div class="form-group">
-					<label>City</label>
-					<input type="text" class="form-control" placeholder="City" name="city" required>
-				</div>
-				<div class="form-group">
-					<label>PIN Code</label>
-					<input type="text" class="form-control" placeholder="PIN Code" name="pin" required>
-				</div>
-				<div class="form-group">
-					<label>Contact No.</label>
-					<input type="text" class="form-control" placeholder="Contact No." name="contact_no" required>
-				</div>
+    // Ambil data dari tabel `cart` untuk pengguna ini
+    $cart_items = mysqli_query($conn, "SELECT * FROM cart_view WHERE user_id = '$uid'");
 
-		</div>
+    // Proses setiap item di keranjang untuk dimasukkan ke tabel `order_items`
+    $total_price = 0;
+    while ($item = mysqli_fetch_assoc($cart_items)) {
+        $product_id = $item['id']; // ID produk
+        $price = $item['product_price']; // Harga produk
+        $quantity = $item['quantity']; // Kuantitas produk
 
+        $total_price += $price * $quantity;
 
-		<div class="col-md-6 my-2">
-			<div class="alert alert-info" role="alert">
-				<i class="fa fa-info-circle"></i> Select payment method.
-			</div>
+        // Masukkan data ke tabel `order_items`
+        mysqli_query($conn, "INSERT INTO order_items 
+            (order_id, product_id, product_price, quantity) 
+            VALUES ('$order_id', '$product_id', '$price', '$quantity')");
+    }
 
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="payment_mode" value="Mobile Banking" required>
-				<label class="form-check-label" for="defaultCheck1">
-					Mobile Banking
-				</label>
-			</div>
+    // Hapus data keranjang setelah checkout selesai
+    mysqli_query($conn, "DELETE FROM cart WHERE user_id = '$uid'");
 
-
-
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="payment_mode" value="COD" required>
-				<label class="form-check-label" for="defaultCheck1">
-					Cash on delivery (COD)
-				</label>
-			</div>
-
-			<div class="py-5">
-				<h4>Total Payable amount:</h4>
-				<h4 class="mx-3"><?php echo 'Rp' . $total ?></h4>
-				<p class="text-primary py-4">
-					<strong> * You are required to pay the amount upon delivery. </strong>
-				</p>
-			</div>
-			<div class="text-center">
-				<input type="submit" name="confirm_order" class="btn custom-btn my-2 btn-lg" value="Confirm Order">
-			</div>
-			</form>
-		</div>
-
-	</div>
-
-</div>
-
-<?php
-
-
-$user_id = $_SESSION['user_id'];
-
-if (isset($_POST["confirm_order"])) {
-
-	$date = date("d-m-y");
-
-	foreach ($_COOKIE['item'] as $name1 => $value) {
-
-
-		$values11 = explode("__", $value);
-
-		mysqli_query($conn, "INSERT INTO orders(user_id, product_name, product_price, product_qty, product_img, order_total, address, firstname, lastname, email, contact_no, city, pincode, payment_mode, order_date, order_status) 
-			VALUES('$user_id', '$values11[1]', '$values11[2]', '$values11[3]', '$values11[0]', '$values11[4]', '$_POST[address]', '$_POST[fname]', '$_POST[lname]', '$_POST[email]', '$_POST[contact_no]', '$_POST[city]', '$_POST[pin]', '$_POST[payment_mode]', '$date', 'In-Process' ) ");
-	}
-
-	$_SESSION['order_placed'] = true;
-
-	for ($i = 1; $i <= $d; $i++) {
-
-		setcookie("item[$i]", "", time() - 3600);
-	}
-
-	$to = $_SESSION['user_email'];
-
-	$subject = "Your Recent Order was Successful - ECART";
-
-	$message = "
-						<html>
-						<head>
-						<title>Your Recent Order was Successful - ECART</title>
-							<style>
-							.text-center{
-							text-align: center;
-							}
-							.text-orange{
-								color: #F8694A;
-							}
-							</style>
-
-							</head>
-							<body class='text-center' style='background-color: #F7F7F7'>
-							<div>
-							<h1 class='text-center'><span style='color: #F8694A'>E-</span><span>CART</span> </h1>
-							</div>
-							<br>
-							<div>
-
-								<div class='container'>
-								<div class='order custom-card px-3 my-4'>
-									<h2>Hello, $_SESSION[firstname]</h2>
-									<h1>Your Order at <span style='color: #F8694A'>E-</span>CART was Successful. </h1>
-								</div>
-								<div>
-								</div>
-							</div>
-								
-								<strong> <p class='my-4'> Your order is currently under processing and will soon be dispatched.</p> </strong>
-								<br>
-								<br>
-								<h4 class='text-orange'>Happy Shopping!</h4>
-								
-							</div>
-							</body>
-							</html>
-						";
-
-	// Always set content-type when sending HTML email
-	$headers = "MIME-Version: 1.0" . "\r\n";
-	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-	// More headers
-	$headers .= 'From: admin@ecart.cf' . "\r\n";
-	// $headers .= 'Cc: myboss@example.com' . "\r\n";
-
-	mail($to, $subject, $message, $headers);
-
-
-	// redirect user to order success page
-	header('Location: order-success.php?ref=checkout');
+    // Redirect ke halaman orders
+    header("Location: orders.php");
+    exit;
 }
-
 ?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="text-left text-orange">Checkout</h3>
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_no">Contact Number</label>
+                <input type="text" id="contact_no" name="contact_no" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" name="pincode" class="form-control" required>
+            </div>
+
+            <!-- Pilihan Metode Pembayaran -->
+            <div class="form-group">
+                <label for="payment_mode">Payment Method</label><br>
+                <input type="radio" id="bank_transfer" name="payment_mode" value="BRI" required>
+                <label for="bank_transfer">BRI</label><br>
+                <input type="radio" id="bank_transfer" name="payment_mode" value="BNI" required>
+                <label for="bank_transfer">BNI</label><br>
+                <input type="radio" id="bank_transfer" name="payment_mode" value="BCA" required>
+                <label for="bank_transfer">BCA</label><br>
+            </div>
+
+            <button type="submit" class="btn custom-btn">Place Order</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
 <?php
+include './inc/footer.php';
 ob_end_flush();
-include './inc/footer.php'
 ?>

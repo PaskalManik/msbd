@@ -1,0 +1,73 @@
+tabel menu
+menu_id
+nama_barang
+harga_barang
+
+tabel orders
+user_id
+order_id
+address
+firstname
+lastname
+email
+contact_no
+city
+pincode
+payment_mode
+order_date
+order_status
+
+tabel products
+id
+product_name
+product_slider
+product_price
+product_stock
+product_img
+product_preview
+product_description
+
+tabel request
+request_id
+nama
+jenis_kelamin
+ukuran_baju
+ukuran_lengan
+jumlah
+gambar
+saran
+status
+created_at
+updated_at
+user_id
+cancel_date
+menu_id
+
+tabel request_log
+log_id
+request_id
+user_id
+jumlah_diambil
+waktu_diambil
+created_at
+status
+
+tabel order_items
+order_item_id
+order_id
+product_id
+product_price
+quantity
+
+tabel users
+user_id
+firstname
+lastname
+email
+contact_no
+role
+password
+is_verified
+verification_code
+created_at
+updated_at
